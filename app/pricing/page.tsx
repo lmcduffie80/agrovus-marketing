@@ -102,7 +102,7 @@ export default function PricingPage() {
 
   async function handleCheckout(planId: string) {
     if (planId === 'scale') {
-      window.location.href = 'mailto:sales@agrovus.app?subject=Agrovus Scale Plan';
+      window.location.assign('mailto:sales@agrovus.app?subject=Agrovus Scale Plan');
       return;
     }
     setLoading(planId);
@@ -124,7 +124,7 @@ export default function PricingPage() {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Checkout failed');
-      window.location.href = data.url;
+      window.location.assign(data.url);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Checkout failed');
       setLoading(null);
