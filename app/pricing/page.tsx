@@ -1,390 +1,379 @@
-"use client";
+'use client';
+import { useState } from 'react';
 
-import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import { CheckoutButton } from "./CheckoutButton";
-
-// ─── Plan data ────────────────────────────────────────────────────────────────
-
+// ─── Plan Data ────────────────────────────────────────────────────────────────
 const PLANS = [
   {
-    id: "starter" as const,
-    name: "Starter",
+    id: 'starter',
+    name: 'Starter',
     monthlyPrice: 499,
     annualPrice: 399,
-    implFee: 999,
-    description: "For small distributors and manufacturers getting started with a modern ERP.",
-    features: [
-      "Finance & Sales modules",
-      "Inventory & Warehouse",
-      "Purchase Orders",
-      "3 users included",
-      "Email support",
-    ],
-    cta: "Start Free Trial",
-    highlight: false,
+    impl: 999,
+    desc: 'For small distributors and manufacturers getting started with a modern ERP.',
+    features: ['Finance & Sales modules', 'Inventory & Warehouse', 'Purchase Orders', '3 users included', 'Email support (48hr SLA)'],
+    featured: false,
+    cta: 'Start Free Trial',
+    includedUsers: 3,
   },
   {
-    id: "growth" as const,
-    name: "Growth",
+    id: 'growth',
+    name: 'Growth',
     monthlyPrice: 1199,
     annualPrice: 959,
-    implFee: 1999,
-    description: "Full ERP suite for growing operations with production and forecasting.",
-    features: [
-      "All Starter modules",
-      "Production module",
-      "Material Requirements tool",
-      "10 users included",
-      "Professional support",
-    ],
-    cta: "Start Free Trial",
-    highlight: true,
+    impl: 1999,
+    desc: 'Full ERP suite for growing operations with production and forecasting needs.',
+    features: ['All Starter modules', 'Production module', 'Material Requirements tool', '10 users included', 'Professional support (8hr SLA)'],
+    featured: true,
+    cta: 'Start Free Trial',
+    includedUsers: 10,
   },
   {
-    id: "scale" as const,
-    name: "Scale",
+    id: 'scale',
+    name: 'Scale',
     monthlyPrice: 2499,
     annualPrice: 1999,
-    implFee: 4999,
-    description: "For multi-location enterprises and complex process manufacturing.",
-    features: [
-      "All Growth modules",
-      "Multi-entity & multi-warehouse",
-      "Financial consolidation",
-      "Unlimited users",
-      "Enterprise support",
-    ],
-    cta: "Contact Sales",
-    highlight: false,
+    impl: 4999,
+    desc: 'For multi-location enterprises and complex process manufacturing operations.',
+    features: ['All Growth modules', 'Multi-entity & multi-warehouse', 'Advanced financial consolidation', 'Unlimited users included', 'Enterprise support (2hr SLA)'],
+    featured: false,
+    cta: 'Contact Sales',
+    includedUsers: null,
   },
-] as const;
-
-// ─── Add-on data ──────────────────────────────────────────────────────────────
-
-const MODULE_ADDONS = [
-  { id: "dfii", name: "Material Requirements (DFII)", desc: "Demand forecasting & inventory intelligence", price: 299 },
-  { id: "toll", name: "Toll Manufacturing Portal", desc: "Coordinate external toll manufacturers", price: 199 },
-  { id: "freight", name: "Freight Intelligence", desc: "Carrier selection & landed cost optimization", price: 149 },
-  { id: "consolidation", name: "Advanced Financial Consolidation", desc: "Multi-entity financial rollup & reporting", price: 249 },
-  { id: "api", name: "API Access", desc: "Full REST API + webhook access", price: 199 },
 ];
 
-const SEAT_OPTIONS = [
-  { id: "seats5", label: "+5 users", price: 99 },
-  { id: "seats10", label: "+10 users", price: 179 },
-  { id: "seats_unlimited", label: "Unlimited users", price: 299 },
+const MODULES = [
+  { id: 'dfii',         name: 'Material Requirements (DFII)',       price: 299, desc: 'Demand forecasting & inventory intelligence' },
+  { id: 'toll',         name: 'Toll Manufacturing Portal',          price: 199, desc: 'Coordinate external toll manufacturers' },
+  { id: 'consolidation',name: 'Advanced Financial Consolidation',   price: 249, desc: 'Multi-entity financial rollup & reporting' },
+  { id: 'api',          name: 'API Access',                         price: 199, desc: 'Full REST API + webhook access' },
 ];
 
-const INTEGRATION_OPTIONS = [
-  { id: "sap", label: "SAP Business One", price: 149 },
-  { id: "qbo", label: "QuickBooks Online", price: 149 },
-  { id: "api_overage", label: "API overage (100K calls/mo)", price: 49 },
-  { id: "edi", label: "EDI / Custom Export", price: 299 },
+const SEAT_PACKS = [
+  { id: 'seats_5',   label: '+5 users',       price: 99  },
+  { id: 'seats_10',  label: '+10 users',       price: 179 },
+  { id: 'seats_unl', label: 'Unlimited users', price: 299 },
+];
+
+const INTEGRATIONS = [
+  { id: 'sap',    name: 'SAP Business One',          price: 149 },
+  { id: 'qbo',    name: 'QuickBooks Online',          price: 149 },
+  { id: 'api_ext',name: 'API overage (100K calls/mo)', price: 49 },
+  { id: 'edi',    name: 'EDI / Custom Export',        price: 299 },
 ];
 
 const SUPPORT_TIERS = [
-  { id: "standard", label: "Standard", desc: "Email + chat · 48hr SLA", price: 0 },
-  { id: "professional", label: "Professional", desc: "Phone + chat · 8hr SLA", price: 199 },
-  { id: "enterprise", label: "Enterprise", desc: "Dedicated CSM · 2hr SLA", price: 499 },
+  { id: 'standard',     name: 'Standard',     price: 0,   desc: 'Email + chat · 48hr SLA' },
+  { id: 'professional', name: 'Professional', price: 199, desc: 'Phone + chat · 8hr SLA' },
+  { id: 'enterprise',   name: 'Enterprise',   price: 499, desc: 'Dedicated CSM · 2hr SLA' },
 ];
 
-// ─── Component ────────────────────────────────────────────────────────────────
+function fmt(n: number) {
+  return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+}
 
 export default function PricingPage() {
-  const [annual, setAnnual] = useState(false);
-  const [selectedModules, setSelectedModules] = useState<Set<string>>(new Set());
-  const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
-  const [selectedIntegrations, setSelectedIntegrations] = useState<Set<string>>(new Set());
-  const [selectedSupport, setSelectedSupport] = useState("standard");
+  const [annual, setAnnual]             = useState(false);
+  const [loading, setLoading]           = useState<string | null>(null);
+  const [error, setError]               = useState<string | null>(null);
+  const [selectedModules, setModules]   = useState<string[]>([]);
+  const [selectedSeat, setSeat]         = useState<string | null>(null);
+  const [selectedIntegrations, setInts] = useState<string[]>([]);
+  const [selectedSupport, setSupport]   = useState<string>('standard');
+  const [selectedPlan, setPlan]         = useState<string | null>(null);
 
   function toggleModule(id: string) {
-    setSelectedModules((prev) => {
-      const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
-      return next;
-    });
+    setModules(prev => prev.includes(id) ? prev.filter(m => m !== id) : [...prev, id]);
+  }
+  function toggleIntegration(id: string) {
+    setInts(prev => prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]);
   }
 
-  function toggleIntegration(id: string) {
-    setSelectedIntegrations((prev) => {
-      const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
-      return next;
-    });
+  function calcAddOns(planId: string) {
+    const modTotal = selectedModules.reduce((sum, id) => {
+      if (planId === 'scale' && ['consolidation', 'api'].includes(id)) return sum;
+      return sum + (MODULES.find(m => m.id === id)?.price || 0);
+    }, 0);
+    const seatTotal = (planId === 'scale' || !selectedSeat)
+      ? 0 : (SEAT_PACKS.find(s => s.id === selectedSeat)?.price || 0);
+    const intTotal  = selectedIntegrations.reduce((sum, id) => sum + (INTEGRATIONS.find(i => i.id === id)?.price || 0), 0);
+    const suppTotal = SUPPORT_TIERS.find(s => s.id === selectedSupport)?.price || 0;
+    return modTotal + seatTotal + intTotal + suppTotal;
+  }
+
+  async function handleCheckout(planId: string) {
+    if (planId === 'scale') {
+      window.location.href = 'mailto:sales@agrovus.app?subject=Agrovus Scale Plan';
+      return;
+    }
+    setLoading(planId);
+    setError(null);
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          planId,
+          billing: annual ? 'annual' : 'monthly',
+          addOns: {
+            modules: selectedModules,
+            seatPack: selectedSeat,
+            integrations: selectedIntegrations,
+            support: selectedSupport,
+          },
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Checkout failed');
+      window.location.href = data.url;
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Checkout failed');
+      setLoading(null);
+    }
   }
 
   return (
-    <div className="mx-auto max-w-3xl px-4 sm:px-6 py-16 sm:py-24">
-      {/* Header */}
-      <div className="text-center mb-10">
-        <p className="text-xs font-semibold tracking-widest text-[#00B477] uppercase mb-3">Pricing</p>
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
-          Build your Agrovus plan
-        </h1>
-        <p className="text-muted-foreground text-base max-w-md mx-auto">
-          Start with a base plan, then add the modules and features your operation actually needs.
-        </p>
-      </div>
+    <>
+      <style>{`
+        :root{--g:#00C695;--gm:#00A67D;--gl:#E6FAF5;--t:#0F1C18;--t2:#4A6359;--t3:#8AA89E;--bg:#F8FAF9;--bg2:#fff;--bd:#E4EBE8;--bd2:#D0DDD8;--fh:var(--font-jakarta),'Plus Jakarta Sans',sans-serif;--fb:'Inter',sans-serif;--sh:0 1px 3px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.04);--shm:0 4px 16px rgba(0,0,0,.08),0 16px 40px rgba(0,0,0,.06)}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        .pricing-wrap{max-width:1080px;margin:0 auto;padding:64px 24px 96px}
+        .hdr{text-align:center;margin-bottom:48px}
+        .slbl{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--g);margin-bottom:10px}
+        .stit{font-family:var(--fh);font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-.03em;color:var(--t);margin-bottom:10px}
+        .ssub{font-size:15px;color:var(--t2);max-width:480px;margin:0 auto 28px;line-height:1.6}
+        .toggle-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:48px}
+        .toggle-label{font-size:14px;font-weight:500;color:var(--t2)}
+        .toggle-label.active{color:var(--t);font-weight:600}
+        .toggle{width:48px;height:26px;background:var(--bd2);border-radius:100px;border:none;cursor:pointer;position:relative;transition:.2s;flex-shrink:0}
+        .toggle.on{background:var(--g)}
+        .toggle-thumb{position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+        .toggle.on .toggle-thumb{left:25px}
+        .annual-badge{background:#FFF8E6;border:1px solid #FFE0A0;color:#8A6400;font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px}
+        .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:56px}
+        .pcard{background:var(--bg2);border:1.5px solid var(--bd);border-radius:16px;padding:28px 24px;position:relative;transition:.2s;cursor:pointer;display:flex;flex-direction:column}
+        .pcard:hover{transform:translateY(-2px);box-shadow:var(--shm)}
+        .pcard.sel{border-color:var(--g);box-shadow:0 0 0 1px var(--g),var(--shm)}
+        .pcard.ft{border-color:var(--g);box-shadow:0 0 0 1px var(--g),var(--shm);transform:scale(1.02)}
+        .pcard.ft:hover{transform:scale(1.02) translateY(-2px)}
+        .ftbdg{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--g);color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 14px;border-radius:100px;white-space:nowrap}
+        .pname{font-family:var(--fh);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:12px}
+        .price-row{display:flex;align-items:baseline;gap:3px;margin-bottom:4px}
+        .pamount{font-family:var(--fh);font-size:38px;font-weight:800;color:var(--t);letter-spacing:-.04em;line-height:1}
+        .pper{font-size:13px;color:var(--t3)}
+        .poriginal{font-size:12px;color:var(--t3);text-decoration:line-through;margin-left:4px}
+        .impl-fee{font-size:12px;color:var(--t2);background:var(--gl);border:1px solid #B3ECD9;border-radius:6px;padding:5px 9px;margin:8px 0 0;display:inline-flex;align-items:center;gap:5px}
+        .impl-fee strong{color:var(--gm);font-weight:600}
+        .pdesc{font-size:13px;color:var(--t2);line-height:1.5;padding:12px 0;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);margin:14px 0 18px}
+        .feats{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:22px;flex:1}
+        .feats li{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--t2)}
+        .feats li::before{content:'✓';color:var(--g);font-weight:700;font-size:12px;flex-shrink:0;margin-top:1px}
+        .addon-total{font-size:12px;color:var(--gm);font-weight:600;margin-bottom:12px;min-height:18px}
+        .btn{width:100%;padding:12px;border-radius:9px;font-family:var(--fb);font-size:14px;font-weight:600;cursor:pointer;border:none;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px}
+        .btn-def{background:var(--bg);color:var(--t);border:1.5px solid var(--bd2)}
+        .btn-def:hover:not(:disabled){border-color:var(--g);color:var(--g)}
+        .btn-ft{background:var(--g);color:#fff}
+        .btn-ft:hover:not(:disabled){background:var(--gm)}
+        .btn:disabled{opacity:.6;cursor:not-allowed}
+        .spinner{width:15px;height:15px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+        .spinner-dark{border-color:rgba(0,0,0,.12);border-top-color:var(--t)}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .addons-wrap{background:var(--bg2);border:1px solid var(--bd);border-radius:16px;padding:36px;margin-bottom:40px;box-shadow:var(--sh)}
+        .addons-title{font-family:var(--fh);font-size:20px;font-weight:800;color:var(--t);letter-spacing:-.02em;margin-bottom:6px}
+        .addons-sub{font-size:14px;color:var(--t2);margin-bottom:28px}
+        .addon-section{margin-bottom:28px}
+        .addon-section-title{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--bd)}
+        .addon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+        .addon-card{background:var(--bg);border:1.5px solid var(--bd);border-radius:10px;padding:14px;cursor:pointer;transition:.15s;display:flex;align-items:flex-start;gap:10px}
+        .addon-card:hover{border-color:var(--bd2)}
+        .addon-card.sel{border-color:var(--g);background:var(--gl)}
+        .addon-check{width:18px;height:18px;border:1.5px solid var(--bd2);border-radius:4px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:11px;transition:.15s}
+        .addon-card.sel .addon-check{background:var(--g);border-color:var(--g);color:#fff}
+        .addon-name{font-size:13px;font-weight:600;color:var(--t);margin-bottom:2px}
+        .addon-desc{font-size:11px;color:var(--t3);line-height:1.4}
+        .addon-price{font-size:12px;font-weight:600;color:var(--gm);margin-top:4px}
+        .seat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+        .seat-card{background:var(--bg);border:1.5px solid var(--bd);border-radius:10px;padding:14px 16px;cursor:pointer;transition:.15s;text-align:center}
+        .seat-card:hover{border-color:var(--bd2)}
+        .seat-card.sel{border-color:var(--g);background:var(--gl)}
+        .seat-label{font-size:13px;font-weight:600;color:var(--t);margin-bottom:4px}
+        .seat-price{font-size:12px;font-weight:600;color:var(--gm)}
+        .support-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+        .support-card{background:var(--bg);border:1.5px solid var(--bd);border-radius:10px;padding:14px 16px;cursor:pointer;transition:.15s}
+        .support-card:hover{border-color:var(--bd2)}
+        .support-card.sel{border-color:var(--g);background:var(--gl)}
+        .support-name{font-size:13px;font-weight:600;color:var(--t);margin-bottom:3px}
+        .support-desc{font-size:11px;color:var(--t3);margin-bottom:4px}
+        .support-price{font-size:12px;font-weight:600;color:var(--gm)}
+        .summary{background:var(--t);border-radius:16px;padding:28px 32px;color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:20px}
+        .summary-left{display:flex;flex-direction:column;gap:6px}
+        .summary-plan{font-size:13px;color:#7A9A90}
+        .summary-total{font-family:var(--fh);font-size:32px;font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1}
+        .summary-breakdown{font-size:12px;color:#7A9A90;margin-top:2px}
+        .summary-right{display:flex;flex-direction:column;gap:8px;min-width:200px}
+        .summary-btn{background:var(--g);color:#fff;font-family:var(--fb);font-size:15px;font-weight:600;padding:14px 28px;border-radius:10px;border:none;cursor:pointer;transition:.2s;text-align:center;width:100%}
+        .summary-btn:hover:not(:disabled){background:var(--gm)}
+        .summary-btn:disabled{opacity:.6;cursor:not-allowed}
+        .summary-note{font-size:11px;color:#5A7A70;text-align:center}
+        .p-error{background:#FFF0F0;border:1px solid #FFB3B3;color:#C0392B;font-size:13px;padding:12px 16px;border-radius:8px;margin-top:16px;text-align:center}
+        .trial-note{text-align:center;font-size:13px;color:var(--t3);margin-top:16px}
+        @media(max-width:720px){
+          .pgrid{grid-template-columns:1fr;max-width:380px;margin-left:auto;margin-right:auto}
+          .pcard.ft{transform:none}
+          .seat-grid,.support-grid{grid-template-columns:1fr 1fr}
+          .summary{flex-direction:column}
+          .summary-right{width:100%}
+        }
+      `}</style>
 
-      {/* Monthly / Annual toggle */}
-      <div className="flex items-center justify-center gap-3 mb-10">
-        <span className={`text-sm font-medium ${!annual ? "text-foreground" : "text-muted-foreground"}`}>
-          Monthly
-        </span>
-        <button
-          onClick={() => setAnnual((a) => !a)}
-          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00B477] ${
-            annual ? "bg-[#00B477]" : "bg-muted-foreground/30"
-          }`}
-          aria-label="Toggle annual billing"
-        >
-          <span
-            className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
-              annual ? "translate-x-6" : "translate-x-1"
-            }`}
-          />
-        </button>
-        <span className={`text-sm font-medium ${annual ? "text-foreground" : "text-muted-foreground"}`}>
-          Annual
-        </span>
-      </div>
+      <div className="pricing-wrap">
+        {/* HEADER */}
+        <div className="hdr">
+          <div className="slbl">Pricing</div>
+          <div className="stit">Build your Agrovus plan</div>
+          <p className="ssub">Start with a base plan, then add the modules and features your operation actually needs.</p>
+        </div>
 
-      {/* Plan cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-        {PLANS.map((plan) => {
-          const price = annual ? plan.annualPrice : plan.monthlyPrice;
-          return (
-            <div
-              key={plan.id}
-              className={`relative flex flex-col rounded-2xl border-2 p-5 ${
-                plan.highlight
-                  ? "border-[#00B477] shadow-lg shadow-[#00B477]/10"
-                  : "border-border"
-              } bg-card`}
-            >
-              {plan.highlight && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                  <span className="bg-[#00B477] text-white text-[10px] font-bold px-3 py-1 rounded-full tracking-wider uppercase">
-                    Most Popular
-                  </span>
-                </div>
-              )}
+        {/* ANNUAL TOGGLE */}
+        <div className="toggle-row">
+          <span className={`toggle-label ${!annual ? 'active' : ''}`}>Monthly</span>
+          <button className={`toggle ${annual ? 'on' : ''}`} onClick={() => setAnnual(!annual)}>
+            <div className="toggle-thumb" />
+          </button>
+          <span className={`toggle-label ${annual ? 'active' : ''}`}>Annual</span>
+          {annual && <span className="annual-badge">Save 20%</span>}
+        </div>
 
-              <p className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase mb-2 mt-1">
-                {plan.name}
-              </p>
-
-              <div className="mb-2">
-                <span className="text-4xl font-bold">${price.toLocaleString()}</span>
-                <span className="text-muted-foreground text-sm">/mo</span>
-              </div>
-
-              <Badge
-                className="w-fit mb-4 text-xs bg-[#00B477]/10 text-[#00B477] border border-[#00B477]/30 hover:bg-[#00B477]/10 font-medium"
+        {/* PLAN CARDS */}
+        <div className="pgrid">
+          {PLANS.map((plan) => {
+            const price     = annual ? plan.annualPrice : plan.monthlyPrice;
+            const addOnAmt  = calcAddOns(plan.id);
+            const isLoading = loading === plan.id;
+            return (
+              <div
+                key={plan.id}
+                className={`pcard ${plan.featured ? 'ft' : ''} ${selectedPlan === plan.id ? 'sel' : ''}`}
+                onClick={() => setPlan(plan.id)}
               >
-                + ${plan.implFee.toLocaleString()} one-time impl fee
-              </Badge>
-
-              <p className="text-xs text-muted-foreground mb-4 leading-relaxed">
-                {plan.description}
-              </p>
-
-              <ul className="space-y-2 mb-6 flex-1">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-xs">
-                    <span className="text-[#00B477] mt-0.5 shrink-0 font-bold">✓</span>
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {plan.cta === "Contact Sales" ? (
-                <a
-                  href="mailto:sales@agrovus.app"
-                  className="w-full inline-flex items-center justify-center rounded-lg border-2 border-border px-4 py-2.5 text-sm font-semibold hover:bg-muted transition-colors"
+                {plan.featured && <div className="ftbdg">Most Popular</div>}
+                <div className="pname">{plan.name}</div>
+                <div className="price-row">
+                  <span className="pamount">{fmt(price)}</span>
+                  <span className="pper">/mo</span>
+                  {annual && <span className="poriginal">{fmt(plan.monthlyPrice)}</span>}
+                </div>
+                <div className="impl-fee">+ <strong>{fmt(plan.impl)}</strong> one-time impl fee</div>
+                <div className="pdesc">{plan.desc}</div>
+                <ul className="feats">
+                  {plan.features.map(f => <li key={f}>{f}</li>)}
+                </ul>
+                {addOnAmt > 0 && (
+                  <div className="addon-total">+ {fmt(addOnAmt)}/mo in add-ons selected</div>
+                )}
+                <button
+                  className={`btn ${plan.featured ? 'btn-ft' : 'btn-def'}`}
+                  onClick={(e) => { e.stopPropagation(); handleCheckout(plan.id); }}
+                  disabled={loading !== null}
                 >
-                  Contact Sales
-                </a>
-              ) : (
-                <CheckoutButton
-                  plan={plan.id}
-                  label={plan.cta}
-                  variant={plan.highlight ? "default" : "outline"}
-                />
-              )}
+                  {isLoading
+                    ? <><span className={`spinner ${!plan.featured ? 'spinner-dark' : ''}`} />Redirecting...</>
+                    : plan.cta}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* ADD-ONS CONFIGURATOR */}
+        <div className="addons-wrap">
+          <div className="addons-title">Customize your plan</div>
+          <div className="addons-sub">Add modules, seats, integrations, and support to any base plan. Selections apply to whichever plan you choose at checkout.</div>
+
+          <div className="addon-section">
+            <div className="addon-section-title">Module Add-Ons — billed monthly</div>
+            <div className="addon-grid">
+              {MODULES.map(m => (
+                <div key={m.id} className={`addon-card ${selectedModules.includes(m.id) ? 'sel' : ''}`} onClick={() => toggleModule(m.id)}>
+                  <div className="addon-check">{selectedModules.includes(m.id) ? '✓' : ''}</div>
+                  <div>
+                    <div className="addon-name">{m.name}</div>
+                    <div className="addon-desc">{m.desc}</div>
+                    <div className="addon-price">+{fmt(m.price)}/mo</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="addon-section">
+            <div className="addon-section-title">Additional User Seats — billed monthly</div>
+            <div className="seat-grid">
+              {SEAT_PACKS.map(s => (
+                <div key={s.id} className={`seat-card ${selectedSeat === s.id ? 'sel' : ''}`} onClick={() => setSeat(selectedSeat === s.id ? null : s.id)}>
+                  <div className="seat-label">{s.label}</div>
+                  <div className="seat-price">+{fmt(s.price)}/mo</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="addon-section">
+            <div className="addon-section-title">Data & Integration Fees — billed monthly</div>
+            <div className="addon-grid">
+              {INTEGRATIONS.map(i => (
+                <div key={i.id} className={`addon-card ${selectedIntegrations.includes(i.id) ? 'sel' : ''}`} onClick={() => toggleIntegration(i.id)}>
+                  <div className="addon-check">{selectedIntegrations.includes(i.id) ? '✓' : ''}</div>
+                  <div>
+                    <div className="addon-name">{i.name}</div>
+                    <div className="addon-price">+{fmt(i.price)}/mo</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="addon-section" style={{ marginBottom: 0 }}>
+            <div className="addon-section-title">Support Tier</div>
+            <div className="support-grid">
+              {SUPPORT_TIERS.map(s => (
+                <div key={s.id} className={`support-card ${selectedSupport === s.id ? 'sel' : ''}`} onClick={() => setSupport(s.id)}>
+                  <div className="support-name">{s.name}</div>
+                  <div className="support-desc">{s.desc}</div>
+                  <div className="support-price">{s.price === 0 ? 'Included' : `+${fmt(s.price)}/mo`}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ORDER SUMMARY */}
+        {selectedPlan && (() => {
+          const plan    = PLANS.find(p => p.id === selectedPlan)!;
+          const base    = annual ? plan.annualPrice : plan.monthlyPrice;
+          const addOns  = calcAddOns(selectedPlan);
+          const total   = base + addOns;
+          return (
+            <div className="summary">
+              <div className="summary-left">
+                <div className="summary-plan">{plan.name} plan · {annual ? 'Annual' : 'Monthly'} billing</div>
+                <div className="summary-total">{fmt(total)}<span style={{ fontSize: '16px', fontWeight: 400, color: '#7A9A90' }}>/mo</span></div>
+                <div className="summary-breakdown">
+                  {fmt(base)}/mo base{addOns > 0 && ` + ${fmt(addOns)}/mo add-ons`}{` + ${fmt(plan.impl)} one-time impl fee`}
+                </div>
+              </div>
+              <div className="summary-right">
+                <button className="summary-btn" onClick={() => handleCheckout(selectedPlan)} disabled={loading !== null}>
+                  {loading === selectedPlan ? 'Redirecting to Stripe...' : `Start Free Trial — ${plan.name}`}
+                </button>
+                <div className="summary-note">14-day free trial · No credit card required</div>
+              </div>
             </div>
           );
-        })}
+        })()}
+
+        {error && <div className="p-error">⚠️ {error} — please try again or contact support@agrovus.app</div>}
+        <p className="trial-note">All plans include a 14-day free trial · Cancel anytime · Annual plans billed monthly at discounted rate</p>
       </div>
-
-      {/* Customize your plan */}
-      <div className="rounded-2xl border border-border bg-card p-6">
-        <h2 className="text-lg font-bold mb-1">Customize your plan</h2>
-        <p className="text-xs text-muted-foreground mb-6">
-          Add modules, seats, integrations, and support. Selections apply to whichever plan you choose.
-        </p>
-
-        {/* Module add-ons */}
-        <Section label="Module Add-Ons — Billed Monthly">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {MODULE_ADDONS.map((addon) => (
-              <AddonCard
-                key={addon.id}
-                checked={selectedModules.has(addon.id)}
-                onToggle={() => toggleModule(addon.id)}
-                label={addon.name}
-                desc={addon.desc}
-                price={addon.price}
-              />
-            ))}
-          </div>
-        </Section>
-
-        {/* User seats */}
-        <Section label="Additional User Seats — Billed Monthly">
-          <div className="grid grid-cols-3 gap-3">
-            {SEAT_OPTIONS.map((opt) => (
-              <SelectableCard
-                key={opt.id}
-                selected={selectedSeat === opt.id}
-                onSelect={() => setSelectedSeat(selectedSeat === opt.id ? null : opt.id)}
-                label={opt.label}
-                price={opt.price}
-              />
-            ))}
-          </div>
-        </Section>
-
-        {/* Data & integrations */}
-        <Section label="Data & Integration Fees — Billed Monthly">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {INTEGRATION_OPTIONS.map((opt) => (
-              <AddonCard
-                key={opt.id}
-                checked={selectedIntegrations.has(opt.id)}
-                onToggle={() => toggleIntegration(opt.id)}
-                label={opt.label}
-                price={opt.price}
-              />
-            ))}
-          </div>
-        </Section>
-
-        {/* Support tier */}
-        <Section label="Support Tier" last>
-          <div className="grid grid-cols-3 gap-3">
-            {SUPPORT_TIERS.map((tier) => (
-              <SelectableCard
-                key={tier.id}
-                selected={selectedSupport === tier.id}
-                onSelect={() => setSelectedSupport(tier.id)}
-                label={tier.label}
-                sublabel={tier.desc}
-                price={tier.price}
-                included={tier.price === 0}
-              />
-            ))}
-          </div>
-        </Section>
-      </div>
-
-      {/* Fine print */}
-      <p className="mt-6 text-center text-xs text-muted-foreground">
-        All plans include a 14-day free trial · Cancel anytime · Annual plans billed monthly at discounted rate
-      </p>
-    </div>
-  );
-}
-
-// ─── Sub-components ───────────────────────────────────────────────────────────
-
-function Section({
-  label,
-  children,
-  last = false,
-}: {
-  label: string;
-  children: React.ReactNode;
-  last?: boolean;
-}) {
-  return (
-    <div className={last ? "" : "mb-6 pb-6 border-b border-border"}>
-      <p className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase mb-3">
-        {label}
-      </p>
-      {children}
-    </div>
-  );
-}
-
-function AddonCard({
-  checked,
-  onToggle,
-  label,
-  desc,
-  price,
-}: {
-  checked: boolean;
-  onToggle: () => void;
-  label: string;
-  desc?: string;
-  price: number;
-}) {
-  return (
-    <button
-      onClick={onToggle}
-      className={`text-left rounded-xl border p-3 transition-colors ${
-        checked ? "border-[#00B477] bg-[#00B477]/5" : "border-border hover:border-[#00B477]/40"
-      }`}
-    >
-      <div className="flex items-start gap-2 mb-1">
-        <span
-          className={`mt-0.5 h-4 w-4 shrink-0 rounded border flex items-center justify-center text-[10px] font-bold ${
-            checked
-              ? "border-[#00B477] bg-[#00B477] text-white"
-              : "border-border bg-background"
-          }`}
-        >
-          {checked && "✓"}
-        </span>
-        <span className="text-xs font-semibold leading-tight">{label}</span>
-      </div>
-      {desc && <p className="text-[10px] text-muted-foreground leading-snug mb-1.5 pl-6">{desc}</p>}
-      <p className="text-xs font-bold text-[#00B477] pl-6">+${price}/mo</p>
-    </button>
-  );
-}
-
-function SelectableCard({
-  selected,
-  onSelect,
-  label,
-  sublabel,
-  price,
-  included = false,
-}: {
-  selected: boolean;
-  onSelect: () => void;
-  label: string;
-  sublabel?: string;
-  price: number;
-  included?: boolean;
-}) {
-  return (
-    <button
-      onClick={onSelect}
-      className={`text-left rounded-xl border p-3 transition-colors ${
-        selected ? "border-[#00B477] bg-[#00B477]/5" : "border-border hover:border-[#00B477]/40"
-      }`}
-    >
-      <p className="text-xs font-semibold mb-0.5">{label}</p>
-      {sublabel && <p className="text-[10px] text-muted-foreground mb-1">{sublabel}</p>}
-      {included ? (
-        <p className="text-xs font-bold text-[#00B477]">Included</p>
-      ) : (
-        <p className="text-xs font-bold text-[#00B477]">+${price}/mo</p>
-      )}
-    </button>
+    </>
   );
 }
