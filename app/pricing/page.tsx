@@ -134,9 +134,9 @@ export default function PricingPage() {
   return (
     <>
       <style>{`
-        :root{--g:#00C695;--gm:#00A67D;--gl:#E6FAF5;--t:#0F1C18;--t2:#4A6359;--t3:#8AA89E;--bg:#F8FAF9;--bg2:#fff;--bd:#E4EBE8;--bd2:#D0DDD8;--fh:var(--font-jakarta),'Plus Jakarta Sans',sans-serif;--fb:'Inter',sans-serif;--sh:0 1px 3px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.04);--shm:0 4px 16px rgba(0,0,0,.08),0 16px 40px rgba(0,0,0,.06)}
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        .pricing-wrap{max-width:1080px;margin:0 auto;padding:64px 24px 96px}
+        .pricing-wrap{--g:#00C695;--gm:#00A67D;--gl:#E6FAF5;--t:#0F1C18;--t2:#4A6359;--t3:#8AA89E;--bg:#F8FAF9;--bg2:#fff;--bd:#E4EBE8;--bd2:#D0DDD8;--fh:var(--font-jakarta),'Plus Jakarta Sans',sans-serif;--fb:'Inter',sans-serif;--sh:0 1px 3px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.04);--shm:0 4px 16px rgba(0,0,0,.08),0 16px 40px rgba(0,0,0,.06)}
+        .pricing-wrap *,.pricing-wrap *::before,.pricing-wrap *::after{box-sizing:border-box}
+        .pricing-wrap{max-width:1080px;margin:0 auto;padding:64px 24px 96px;font-family:var(--fb);font-size:15px;line-height:1.6;color:var(--t)}
         .hdr{text-align:center;margin-bottom:48px}
         .slbl{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--g);margin-bottom:10px}
         .stit{font-family:var(--fh);font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-.03em;color:var(--t);margin-bottom:10px}
