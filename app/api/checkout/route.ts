@@ -47,7 +47,6 @@ const SEAT_PRICES: Record<string, () => string> = {
 };
 
 const INTEGRATION_PRICES: Record<string, () => string> = {
-  sap:     () => process.env.STRIPE_INT_SAP_PRICE_ID!,
   qbo:     () => process.env.STRIPE_INT_QBO_PRICE_ID!,
   api_ext: () => process.env.STRIPE_INT_API_PRICE_ID!,
   edi:     () => process.env.STRIPE_INT_EDI_PRICE_ID!,

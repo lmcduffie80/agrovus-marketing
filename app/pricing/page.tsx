@@ -55,7 +55,6 @@ const SEAT_PACKS = [
 ];
 
 const INTEGRATIONS = [
-  { id: 'sap',    name: 'SAP Business One',          price: 149 },
   { id: 'qbo',    name: 'QuickBooks Online',          price: 149 },
   { id: 'api_ext',name: 'API overage (100K calls/mo)', price: 49 },
   { id: 'edi',    name: 'EDI / Custom Export',        price: 299 },
