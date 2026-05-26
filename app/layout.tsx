@@ -38,23 +38,41 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 flex h-14 items-center justify-between">
-            <Link href="/" className="flex items-center">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 flex h-16 items-center justify-between">
+            {/* Logo — wider render so the icon + wordmark both read clearly */}
+            <Link href="/" className="flex items-center shrink-0">
               <Image
                 src="/agrovus-logo.svg"
                 alt="Agrovus"
-                width={120}
-                height={24}
+                width={160}
+                height={32}
                 priority
+                style={{ height: 32, width: "auto" }}
               />
             </Link>
+
             <nav className="flex items-center gap-6 text-sm">
-              <Link href="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link
+                href="/features"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Features
+              </Link>
+              <Link
+                href="/pricing"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
                 Pricing
+              </Link>
+              <Link
+                href="/pricing"
+                className="inline-flex items-center justify-center rounded-md bg-[#00B477] px-4 py-1.5 text-sm font-medium text-white hover:bg-[#009962] transition-colors"
+              >
+                Get Started
               </Link>
               <a
                 href="https://agrovus.app/login"
-                className="inline-flex items-center justify-center rounded-md bg-[#00B477] px-4 py-1.5 text-sm font-medium text-white hover:bg-[#009962] transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 Sign In
               </a>
@@ -65,11 +83,40 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
 
         <footer className="border-t border-border bg-muted/40">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            <span>© {new Date().getFullYear()} Agrovus. All rights reserved.</span>
-            <div className="flex gap-6">
-              <Link href="/pricing" className="hover:text-foreground transition-colors">Pricing</Link>
-              <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10">
+            <div className="flex flex-col sm:flex-row gap-8 justify-between mb-8">
+              <div>
+                <Image
+                  src="/agrovus-logo.svg"
+                  alt="Agrovus"
+                  width={140}
+                  height={28}
+                  style={{ height: 28, width: "auto" }}
+                />
+                <p className="text-sm text-muted-foreground mt-2 max-w-xs">
+                  ERP built for agriculture — from seed to shelf.
+                </p>
+              </div>
+              <div className="flex gap-12 text-sm">
+                <div className="flex flex-col gap-2">
+                  <p className="font-semibold text-foreground mb-1">Features</p>
+                  <Link href="/features/crm" className="text-muted-foreground hover:text-foreground transition-colors">CRM & Sales</Link>
+                  <Link href="/features/inventory" className="text-muted-foreground hover:text-foreground transition-colors">Inventory</Link>
+                  <Link href="/features/production" className="text-muted-foreground hover:text-foreground transition-colors">Production</Link>
+                  <Link href="/features/finance" className="text-muted-foreground hover:text-foreground transition-colors">Finance & AR</Link>
+                  <Link href="/features/ai" className="text-muted-foreground hover:text-foreground transition-colors">AI Workflows</Link>
+                  <Link href="/features/portal" className="text-muted-foreground hover:text-foreground transition-colors">Customer Portal</Link>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="font-semibold text-foreground mb-1">Company</p>
+                  <Link href="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</Link>
+                  <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</Link>
+                  <a href="mailto:support@agrovus.app" className="text-muted-foreground hover:text-foreground transition-colors">Support</a>
+                </div>
+              </div>
+            </div>
+            <div className="border-t border-border pt-6 text-sm text-muted-foreground">
+              © {new Date().getFullYear()} Agrovus. All rights reserved.
             </div>
           </div>
         </footer>

@@ -5,36 +5,42 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const features = [
   {
+    href: "/features/crm",
     icon: "🌾",
     title: "CRM & Sales Pipeline",
     description:
       "Track inquiries, manage your pipeline, and generate production forecasts — built around ag sales cycles.",
   },
   {
+    href: "/features/inventory",
     icon: "📦",
     title: "Inventory & Warehousing",
     description:
       "Real-time multi-location inventory with lot tracking, transfers, and FIFO costing across your facilities.",
   },
   {
+    href: "/features/production",
     icon: "🏭",
     title: "Production & Work Orders",
     description:
       "Bill of materials, work orders, and blend scheduling purpose-built for formulated ag products.",
   },
   {
+    href: "/features/finance",
     icon: "💰",
     title: "Finance & AR",
     description:
       "Invoicing, AR aging, bank reconciliation, and Plaid-powered bank feeds — no separate accounting software needed.",
   },
   {
+    href: "/features/ai",
     icon: "🤖",
     title: "AI-Powered Workflows",
     description:
       "AI parses SDS documents, generates BOMs from crop support files, and flags hazmat requirements automatically.",
   },
   {
+    href: "/features/portal",
     icon: "🌐",
     title: "Customer Portal",
     description:
@@ -100,15 +106,18 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((f) => (
-              <Card key={f.title} className="border-border shadow-sm hover:shadow-md transition-shadow">
-                <CardContent className="pt-6">
-                  <div className="text-3xl mb-3">{f.icon}</div>
-                  <h3 className="font-semibold text-lg mb-2">{f.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {f.description}
-                  </p>
-                </CardContent>
-              </Card>
+              <Link key={f.title} href={f.href} className="group">
+                <Card className="h-full border-border shadow-sm hover:shadow-md hover:border-[#00B477]/30 transition-all">
+                  <CardContent className="pt-6">
+                    <div className="text-3xl mb-3">{f.icon}</div>
+                    <h3 className="font-semibold text-lg mb-2 group-hover:text-[#00B477] transition-colors">{f.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {f.description}
+                    </p>
+                    <p className="text-xs font-medium text-[#00B477] mt-3">Learn more →</p>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
