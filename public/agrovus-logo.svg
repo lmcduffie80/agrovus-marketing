@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" width="320" height="64">
+  <defs>
+    <linearGradient id="sq" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00C896"/>
+      <stop offset="100%" style="stop-color:#00A878"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Simple square icon with leaf cutout — like NetSuite's cube -->
+  <rect x="0" y="8" width="48" height="48" rx="10" fill="url(#sq)"/>
+  
+  <!-- Stylized "A" negative space / leaf mark -->
+  <polygon points="24,16 38,44 10,44" fill="none" stroke="white" stroke-width="3.5" stroke-linejoin="round"/>
+  <line x1="15" y1="37" x2="33" y2="37" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Wordmark: clean, modern, single weight -->
+  <text x="66" y="44"
+    font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+    font-size="32"
+    font-weight="700"
+    letter-spacing="-0.5"
+    fill="#1A1A2E">Agrovus</text>
+
+</svg>

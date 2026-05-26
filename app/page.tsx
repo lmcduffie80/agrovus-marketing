@@ -1,65 +1,139 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
-export default function Home() {
+const features = [
+  {
+    icon: "🌾",
+    title: "CRM & Sales Pipeline",
+    description:
+      "Track inquiries, manage your pipeline, and generate production forecasts — built around ag sales cycles.",
+  },
+  {
+    icon: "📦",
+    title: "Inventory & Warehousing",
+    description:
+      "Real-time multi-location inventory with lot tracking, transfers, and FIFO costing across your facilities.",
+  },
+  {
+    icon: "🏭",
+    title: "Production & Work Orders",
+    description:
+      "Bill of materials, work orders, and blend scheduling purpose-built for formulated ag products.",
+  },
+  {
+    icon: "💰",
+    title: "Finance & AR",
+    description:
+      "Invoicing, AR aging, bank reconciliation, and Plaid-powered bank feeds — no separate accounting software needed.",
+  },
+  {
+    icon: "🤖",
+    title: "AI-Powered Workflows",
+    description:
+      "AI parses SDS documents, generates BOMs from crop support files, and flags hazmat requirements automatically.",
+  },
+  {
+    icon: "🌐",
+    title: "Customer Portal",
+    description:
+      "Self-service portal lets customers review invoices, download documents, and submit new orders — branded for you.",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-background">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-24 sm:py-32 text-center">
+          <Badge className="mb-6 bg-[#00B477]/10 text-[#00B477] border-[#00B477]/20 hover:bg-[#00B477]/10">
+            Purpose-built for agriculture
+          </Badge>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-6">
+            The ERP ag companies{" "}
+            <span className="text-[#00B477]">actually use.</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mx-auto max-w-2xl text-lg sm:text-xl text-muted-foreground mb-10">
+            One platform for CRM, inventory, production, finance, and customer
+            management — designed from the ground up for ag manufacturers and
+            distributors.
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/pricing">
+              <Button size="lg" className="bg-[#00B477] hover:bg-[#009962] text-white w-full sm:w-auto">
+                See Pricing →
+              </Button>
+            </Link>
+            <a href="https://agrovus.app/login">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto">
+                Sign In
+              </Button>
+            </a>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Subtle grid background */}
+        <div
+          className="absolute inset-0 -z-10 opacity-[0.03]"
+          style={{
+            backgroundImage:
+              "linear-gradient(#00B477 1px, transparent 1px), linear-gradient(to right, #00B477 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+      </section>
+
+      {/* Features */}
+      <section className="bg-muted/30 border-y border-border py-20 sm:py-28">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+              Everything your operation needs
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+              No bolt-ons. No consultants required. Every module ships ready to
+              use on day one.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((f) => (
+              <Card key={f.title} className="border-border shadow-sm hover:shadow-md transition-shadow">
+                <CardContent className="pt-6">
+                  <div className="text-3xl mb-3">{f.icon}</div>
+                  <h3 className="font-semibold text-lg mb-2">{f.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {f.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* CTA Banner */}
+      <section className="bg-[#00B477] py-16 sm:py-20">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 text-center text-white">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+            Ready to modernize your operation?
+          </h2>
+          <p className="text-[#ccf5e7] text-lg mb-8">
+            Get started today with a 14-day free trial on your license. The
+            implementation fee secures your onboarding slot.
+          </p>
+          <Link href="/pricing">
+            <Button
+              size="lg"
+              className="bg-white text-[#00B477] hover:bg-[#f0fdf9] font-semibold"
+            >
+              View Plans & Pricing
+            </Button>
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }
