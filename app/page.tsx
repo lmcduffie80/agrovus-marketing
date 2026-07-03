@@ -5,18 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const features = [
   {
-    href: "/features/crm",
-    icon: "🌾",
-    title: "CRM & Sales Pipeline",
-    description:
-      "Track inquiries, manage your pipeline, and generate production forecasts — built around ag sales cycles.",
-  },
-  {
     href: "/features/inventory",
     icon: "📦",
-    title: "Inventory & Warehousing",
+    title: "Catalog & Inventory",
     description:
-      "Real-time multi-location inventory with lot tracking, transfers, and FIFO costing across your facilities.",
+      "Finished goods catalog with material costing, real-time multi-location inventory, lot tracking, and FIFO costing across your facilities.",
   },
   {
     href: "/features/production",
@@ -24,6 +17,13 @@ const features = [
     title: "Production & Work Orders",
     description:
       "Bill of materials, work orders, and blend scheduling purpose-built for formulated ag products.",
+  },
+  {
+    href: "/features/crm",
+    icon: "🌾",
+    title: "Sales & CRM",
+    description:
+      "Track inquiries, manage your pipeline, and generate production forecasts — built around ag sales cycles.",
   },
   {
     href: "/features/finance",
