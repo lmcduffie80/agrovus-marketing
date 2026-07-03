@@ -3,18 +3,11 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const features = [
   {
-    href: "/features/crm",
-    icon: "🌾",
-    name: "CRM & Sales Pipeline",
-    tagline: "From first inquiry to closed deal",
-    desc: "Manage leads, track opportunities, forecast production, and run your sales team — all built around ag sales cycles.",
-  },
-  {
     href: "/features/inventory",
     icon: "📦",
-    name: "Inventory & Warehousing",
-    tagline: "Real-time visibility across every location",
-    desc: "Multi-location inventory with lot tracking, FIFO costing, transfers, and automatic reorder points.",
+    name: "Catalog & Inventory",
+    tagline: "Products, costing, and stock in one place",
+    desc: "Finished goods catalog with material costing, multi-location inventory, lot tracking, FIFO costing, and SDS repository.",
   },
   {
     href: "/features/production",
@@ -22,6 +15,13 @@ const features = [
     name: "Production & Work Orders",
     tagline: "Blend scheduling built for ag",
     desc: "Bills of materials, work orders, and production scheduling designed for formulated ag products.",
+  },
+  {
+    href: "/features/crm",
+    icon: "🌾",
+    name: "Sales & CRM",
+    tagline: "From first inquiry to closed deal",
+    desc: "Manage leads, track opportunities, forecast production, and run your sales team — all built around ag sales cycles.",
   },
   {
     href: "/features/finance",
