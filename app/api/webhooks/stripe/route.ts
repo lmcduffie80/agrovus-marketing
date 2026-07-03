@@ -47,6 +47,42 @@ export async function POST(req: NextRequest) {
             plan = EXCLUDED.plan,
             status = EXCLUDED.status
         `;
+
+        // Call ERP to auto-provision the customer account
+        const erpUrl = process.env.ERP_PROVISION_URL ?? 'https://agrovus.app/api/provision';
+        const provisionSecret = process.env.PROVISION_SECRET;
+        if (provisionSecret) {
+          const addOns = sub.metadata.modules
+            ? sub.metadata.modules.split(',').filter(Boolean)
+            : [];
+          try {
+            const provisionRes = await fetch(erpUrl, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${provisionSecret}`,
+              },
+              body: JSON.stringify({
+                email,
+                name: session.customer_details?.name ?? '',
+                company: email.split('@')[1]?.split('.')[0] ?? '',
+                plan,
+                addOns,
+                billing: sub.metadata.billing ?? 'monthly',
+                seats: sub.metadata.seat_pack ?? '',
+                stripeCustomerId: customer,
+                stripeSubscriptionId: subscription,
+              }),
+            });
+            if (!provisionRes.ok) {
+              console.error('[stripe webhook] ERP provision failed:', await provisionRes.text());
+            } else {
+              console.log('[stripe webhook] ERP provisioned:', email);
+            }
+          } catch (provisionErr) {
+            console.error('[stripe webhook] ERP provision error (non-fatal):', provisionErr);
+          }
+        }
         break;
       }
 
