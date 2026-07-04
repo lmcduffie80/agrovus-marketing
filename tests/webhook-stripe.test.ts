@@ -60,9 +60,6 @@ describe('POST /api/webhooks/stripe — provision call', () => {
     vi.stubEnv('PROVISION_SECRET', 'test-provision-secret');
     vi.stubEnv('ERP_PROVISION_URL', 'https://agrovus.app/api/provision');
     vi.stubEnv('DATABASE_URL', 'postgresql://test');
-    vi.stubEnv('STRIPE_STARTER_LICENSE_PRICE_ID', 'price_starter');
-    vi.stubEnv('STRIPE_GROWTH_LICENSE_PRICE_ID', 'price_growth');
-    vi.stubEnv('STRIPE_SCALE_LICENSE_PRICE_ID', 'price_scale');
 
     mockConstructEvent.mockReturnValue(completedEvent);
     mockSubscriptionsRetrieve.mockResolvedValue(mockSub);
@@ -84,6 +81,20 @@ describe('POST /api/webhooks/stripe — provision call', () => {
     expect(payload.plan).toBe('starter');
     expect(payload.addOns).toEqual(['dfii']);
     expect(payload.seats).toBe('seats_5');
+  });
+
+  it('resolves plan from subscription metadata, not price ID', async () => {
+    const growthSub = {
+      ...mockSub,
+      items: { data: [{ price: { id: 'price_some_unknown_id' } }] },
+      metadata: { ...mockSub.metadata, plan: 'growth' },
+    };
+    mockSubscriptionsRetrieve.mockResolvedValue(growthSub);
+    vi.resetModules();
+    const { POST } = await import('@/app/api/webhooks/stripe/route');
+    await POST(makeWebhookRequest(completedEvent));
+    const payload = JSON.parse(mockFetch.mock.calls[0][1].body);
+    expect(payload.plan).toBe('growth');
   });
 
   it('still returns 200 if ERP provision call returns non-ok', async () => {

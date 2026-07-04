@@ -33,10 +33,9 @@ export async function POST(req: NextRequest) {
         const subscription = session.subscription as string;
         const email = session.customer_details?.email ?? session.customer_email ?? "";
 
-        // Retrieve subscription to determine plan from the recurring price ID
+        // Retrieve subscription to determine plan from metadata
         const sub = await stripe.subscriptions.retrieve(subscription);
-        const priceId = sub.items.data[0]?.price.id ?? "";
-        const plan = resolvePlan(priceId);
+        const plan = resolvePlan(sub);
 
         await sql`
           INSERT INTO accounts (email, stripe_customer_id, stripe_subscription_id, plan, status)
@@ -88,8 +87,7 @@ export async function POST(req: NextRequest) {
 
       case "customer.subscription.updated": {
         const sub = event.data.object as Stripe.Subscription;
-        const priceId = sub.items.data[0]?.price.id ?? "";
-        const plan = resolvePlan(priceId);
+        const plan = resolvePlan(sub);
 
         await sql`
           UPDATE accounts
@@ -131,11 +129,6 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({ received: true });
 }
 
-function resolvePlan(priceId: string): string {
-  const map: Record<string, string> = {
-    [process.env.STRIPE_STARTER_LICENSE_PRICE_ID!]: "starter",
-    [process.env.STRIPE_GROWTH_LICENSE_PRICE_ID!]: "growth",
-    [process.env.STRIPE_SCALE_LICENSE_PRICE_ID!]: "scale",
-  };
-  return map[priceId] ?? "starter";
+function resolvePlan(sub: Stripe.Subscription): string {
+  return (sub.metadata?.plan ?? 'starter').toLowerCase();
 }
