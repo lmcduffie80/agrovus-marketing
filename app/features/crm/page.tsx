@@ -4,10 +4,10 @@ import { Badge } from "@/components/ui/badge";
 const capabilities = [
   { title: "Inquiry Management", desc: "Capture and track every inbound inquiry. Log conversations, assign follow-ups, and never let a deal slip through the cracks." },
   { title: "Sales Pipeline", desc: "Visual pipeline stages from prospect to closed. See deal value, probability, and expected close date at a glance." },
-  { title: "Production Forecasting", desc: "Convert pipeline into production forecasts automatically. Know what to blend before the order is even placed." },
+  { title: "Production Forecasting", desc: "Track production forecasts alongside your pipeline, so you know what to plan for before the order is placed." },
   { title: "Revenue Reporting", desc: "Monthly, quarterly, and annual revenue views by product, rep, territory, or customer segment." },
   { title: "Customer History", desc: "Every order, invoice, and interaction in one timeline. Walk into any customer conversation fully prepared." },
-  { title: "Multi-Entity Support", desc: "Run CRM across multiple subsidiaries from a single login. Separate pipelines, shared customer master." },
+  { title: "Multi-Entity Support", desc: "Run CRM across multiple subsidiaries from a single login, with pipelines and contacts kept separate per entity." },
 ];
 
 export default function CRMPage() {
@@ -23,7 +23,7 @@ export default function CRMPage() {
               Sales & CRM built for<br />ag sales cycles
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              From first inquiry to production forecast, Agrovus tracks every deal and automatically feeds your production plan — no spreadsheets required.
+              From first inquiry to production forecast, Agrovus tracks every deal and keeps your production plan in view — no spreadsheets required.
             </p>
             <Link
               href="/pricing"
@@ -41,7 +41,7 @@ export default function CRMPage() {
           {[
             { value: "100%", label: "Ag-native pipeline stages" },
             { value: "0", label: "Spreadsheets needed" },
-            { value: "Real-time", label: "Production forecasting" },
+            { value: "Built-in", label: "Production forecasting" },
             { value: "1 login", label: "Multi-entity support" },
           ].map((s) => (
             <div key={s.label} className="text-center">

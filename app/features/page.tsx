@@ -7,13 +7,13 @@ const features = [
     icon: "📦",
     name: "Catalog & Inventory",
     tagline: "Products, costing, and stock in one place",
-    desc: "Finished goods catalog with material costing, multi-location inventory, lot tracking, FIFO costing, and SDS repository.",
+    desc: "Finished goods catalog with material costing, multi-location inventory, lot tracking, moving-average costing, and SDS repository.",
   },
   {
     href: "/features/production",
     icon: "🏭",
     name: "Production & Work Orders",
-    tagline: "Blend scheduling built for ag",
+    tagline: "BOMs and work orders built for ag",
     desc: "Bills of materials, work orders, and production scheduling designed for formulated ag products.",
   },
   {
@@ -42,7 +42,7 @@ const features = [
     icon: "🌐",
     name: "Customer Portal",
     tagline: "Self-service for your customers",
-    desc: "Branded portal where customers review invoices, download documents, and submit orders without calling you.",
+    desc: "Branded portal where customers review invoices, download documents, and upload crop support files for new product requests — without calling you.",
   },
 ];
 

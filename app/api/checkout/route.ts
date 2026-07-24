@@ -16,21 +16,14 @@ type PlanKey = keyof typeof PLANS;
 
 const ADDON_PRICING: Record<string, { name: string; unitAmount: number }> = {
   dfii:          { name: 'Material Requirements Planning (DFII)', unitAmount: 29900 },
-  toll:          { name: 'Toll Manufacturing',                    unitAmount: 19900 },
-  consolidation: { name: 'Advanced Financial Consolidation',      unitAmount: 24900 },
-  api:           { name: 'API Access',                            unitAmount: 19900 },
+  toll:          { name: 'Formulation Manuals',                   unitAmount: 19900 },
+  consolidation: { name: 'Multi-Entity Finance',                  unitAmount: 24900 },
 };
 
 const SEAT_PRICING: Record<string, { name: string; unitAmount: number }> = {
   seats_5:   { name: 'Additional 5 Users',        unitAmount:  9900 },
   seats_10:  { name: 'Additional 10 Users',        unitAmount: 17900 },
   seats_unl: { name: 'Unlimited Additional Users', unitAmount: 29900 },
-};
-
-const INTEGRATION_PRICING: Record<string, { name: string; unitAmount: number }> = {
-  qbo:     { name: 'QuickBooks Online Integration', unitAmount: 14900 },
-  api_ext: { name: 'API (100K calls/mo)',            unitAmount:  4900 },
-  edi:     { name: 'EDI / Custom Export',            unitAmount: 29900 },
 };
 
 const SUPPORT_PRICING: Record<string, { name: string; unitAmount: number } | null> = {
@@ -106,12 +99,6 @@ export async function POST(req: NextRequest) {
       lineItems.push(recurringItem(seat.name, seat.unitAmount, 'month'));
     }
 
-    const integrations: string[] = addOns.integrations || [];
-    for (const intId of integrations) {
-      const integration = INTEGRATION_PRICING[intId];
-      if (integration) lineItems.push(recurringItem(integration.name, integration.unitAmount, 'month'));
-    }
-
     const support = SUPPORT_PRICING[addOns.support || 'standard'];
     if (support) lineItems.push(recurringItem(support.name, support.unitAmount, 'month'));
 
@@ -129,7 +116,6 @@ export async function POST(req: NextRequest) {
           billing,
           modules:      modules.join(','),
           seat_pack:    addOns.seatPack || '',
-          integrations: integrations.join(','),
           support:      addOns.support || 'standard',
         },
       },

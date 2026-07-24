@@ -10,7 +10,7 @@ const PLANS = [
     annualPrice: 399,
     impl: 999,
     desc: 'For small distributors and manufacturers getting started with a modern ERP.',
-    features: ['Catalog & Products', 'Inventory & Warehousing', 'Procurement & Purchasing', 'Production & Work Orders', 'Order Management', '5 users included', 'Email support (48hr SLA)'],
+    features: ['Inventory & Warehousing', 'Procurement & Purchasing', '5 users included', 'Email support (48hr SLA)'],
     featured: false,
     cta: 'Start Free Trial',
     includedUsers: 5,
@@ -34,7 +34,7 @@ const PLANS = [
     annualPrice: 1999,
     impl: 4999,
     desc: 'For multi-location enterprises and complex process manufacturing operations.',
-    features: ['All Growth modules', 'Material Requirements Planning', 'Multi-entity & multi-warehouse', 'Formulation Manuals', 'Advanced financial consolidation', 'Unlimited users included', 'Enterprise support (2hr SLA)'],
+    features: ['All Growth modules', 'Material Requirements Planning', 'Multi-entity & multi-warehouse', 'Formulation Manuals', 'Multi-entity finance & banking', 'Unlimited users included', 'Enterprise support (2hr SLA)'],
     featured: false,
     cta: 'Contact Sales',
     includedUsers: null,
@@ -42,22 +42,15 @@ const PLANS = [
 ];
 
 const MODULES = [
-  { id: 'dfii',         name: 'Material Requirements (DFII)',       price: 299, desc: 'Demand forecasting & inventory intelligence' },
-  { id: 'toll',         name: 'Toll Manufacturing Portal',          price: 199, desc: 'Coordinate external toll manufacturers' },
-  { id: 'consolidation',name: 'Advanced Financial Consolidation',   price: 249, desc: 'Multi-entity financial rollup & reporting' },
-  { id: 'api',          name: 'API Access',                         price: 199, desc: 'Full REST API + webhook access' },
+  { id: 'dfii',         name: 'Material Requirements (DFII)',       price: 299, desc: 'BOM-based material requirements calculation' },
+  { id: 'toll',         name: 'Formulation Manuals',                price: 199, desc: 'Version-controlled formulation documentation' },
+  { id: 'consolidation',name: 'Multi-Entity Finance',                price: 249, desc: 'Finance & banking modules across entities' },
 ];
 
 const SEAT_PACKS = [
   { id: 'seats_5',   label: '+5 users',       price: 99  },
   { id: 'seats_10',  label: '+10 users',       price: 179 },
   { id: 'seats_unl', label: 'Unlimited users', price: 299 },
-];
-
-const INTEGRATIONS = [
-  { id: 'qbo',    name: 'QuickBooks Online',          price: 149 },
-  { id: 'api_ext',name: 'API overage (100K calls/mo)', price: 49 },
-  { id: 'edi',    name: 'EDI / Custom Export',        price: 299 },
 ];
 
 const SUPPORT_TIERS = [
@@ -76,27 +69,22 @@ export default function PricingPage() {
   const [error, setError]               = useState<string | null>(null);
   const [selectedModules, setModules]   = useState<string[]>([]);
   const [selectedSeat, setSeat]         = useState<string | null>(null);
-  const [selectedIntegrations, setInts] = useState<string[]>([]);
   const [selectedSupport, setSupport]   = useState<string>('standard');
   const [selectedPlan, setPlan]         = useState<string | null>(null);
 
   function toggleModule(id: string) {
     setModules(prev => prev.includes(id) ? prev.filter(m => m !== id) : [...prev, id]);
   }
-  function toggleIntegration(id: string) {
-    setInts(prev => prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]);
-  }
 
   function calcAddOns(planId: string) {
     const modTotal = selectedModules.reduce((sum, id) => {
-      if (planId === 'scale' && ['consolidation', 'api'].includes(id)) return sum;
+      if (planId === 'scale' && id === 'consolidation') return sum;
       return sum + (MODULES.find(m => m.id === id)?.price || 0);
     }, 0);
     const seatTotal = (planId === 'scale' || !selectedSeat)
       ? 0 : (SEAT_PACKS.find(s => s.id === selectedSeat)?.price || 0);
-    const intTotal  = selectedIntegrations.reduce((sum, id) => sum + (INTEGRATIONS.find(i => i.id === id)?.price || 0), 0);
     const suppTotal = SUPPORT_TIERS.find(s => s.id === selectedSupport)?.price || 0;
-    return modTotal + seatTotal + intTotal + suppTotal;
+    return modTotal + seatTotal + suppTotal;
   }
 
   async function handleCheckout(planId: string) {
@@ -116,7 +104,6 @@ export default function PricingPage() {
           addOns: {
             modules: selectedModules,
             seatPack: selectedSeat,
-            integrations: selectedIntegrations,
             support: selectedSupport,
           },
         }),
@@ -286,7 +273,7 @@ export default function PricingPage() {
         {/* ADD-ONS CONFIGURATOR */}
         <div className="addons-wrap">
           <div className="addons-title">Customize your plan</div>
-          <div className="addons-sub">Add modules, seats, integrations, and support to any base plan. Selections apply to whichever plan you choose at checkout.</div>
+          <div className="addons-sub">Add modules, seats, and support to any base plan. Selections apply to whichever plan you choose at checkout.</div>
 
           <div className="addon-section">
             <div className="addon-section-title">Module Add-Ons — billed monthly</div>
@@ -311,21 +298,6 @@ export default function PricingPage() {
                 <div key={s.id} className={`seat-card ${selectedSeat === s.id ? 'sel' : ''}`} onClick={() => setSeat(selectedSeat === s.id ? null : s.id)}>
                   <div className="seat-label">{s.label}</div>
                   <div className="seat-price">+{fmt(s.price)}/mo</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="addon-section">
-            <div className="addon-section-title">Data & Integration Fees — billed monthly</div>
-            <div className="addon-grid">
-              {INTEGRATIONS.map(i => (
-                <div key={i.id} className={`addon-card ${selectedIntegrations.includes(i.id) ? 'sel' : ''}`} onClick={() => toggleIntegration(i.id)}>
-                  <div className="addon-check">{selectedIntegrations.includes(i.id) ? '✓' : ''}</div>
-                  <div>
-                    <div className="addon-name">{i.name}</div>
-                    <div className="addon-price">+{fmt(i.price)}/mo</div>
-                  </div>
                 </div>
               ))}
             </div>

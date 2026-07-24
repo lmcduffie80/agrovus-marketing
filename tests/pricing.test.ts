@@ -13,7 +13,6 @@ const MODULES = [
   { id: 'dfii',          price: 299 },
   { id: 'toll',          price: 199 },
   { id: 'consolidation', price: 249 },
-  { id: 'api',           price: 199 },
 ];
 
 const SEAT_PACKS = [
@@ -32,18 +31,16 @@ function calcAddOns(
   planId: string,
   selectedModules: string[],
   selectedSeat: string | null,
-  selectedIntegrations: string[],
   selectedSupport: string,
 ) {
   const modTotal = selectedModules.reduce((sum, id) => {
-    if (planId === 'scale' && ['consolidation', 'api'].includes(id)) return sum;
+    if (planId === 'scale' && id === 'consolidation') return sum;
     return sum + (MODULES.find(m => m.id === id)?.price ?? 0);
   }, 0);
   const seatTotal = (planId === 'scale' || !selectedSeat)
     ? 0 : (SEAT_PACKS.find(s => s.id === selectedSeat)?.price ?? 0);
-  const intTotal  = selectedIntegrations.length * 0; // no integrations in this test
   const suppTotal = SUPPORT_TIERS.find(s => s.id === selectedSupport)?.price ?? 0;
-  return modTotal + seatTotal + intTotal + suppTotal;
+  return modTotal + seatTotal + suppTotal;
 }
 
 // ─── Tests ────────────────────────────────────────────────────────────────────
@@ -68,47 +65,52 @@ describe('Plan data', () => {
     expect(ids).not.toContain('freight');
   });
 
-  it('has exactly 4 modules', () => {
-    expect(MODULES).toHaveLength(4);
+  it('API Access is NOT in module list (unimplemented — removed from sale)', () => {
+    const ids = MODULES.map(m => m.id);
+    expect(ids).not.toContain('api');
+  });
+
+  it('has exactly 3 modules', () => {
+    expect(MODULES).toHaveLength(3);
   });
 });
 
 describe('calcAddOns', () => {
   it('returns 0 with no selections and standard support', () => {
-    expect(calcAddOns('starter', [], null, [], 'standard')).toBe(0);
+    expect(calcAddOns('starter', [], null, 'standard')).toBe(0);
   });
 
   it('adds module price correctly', () => {
-    expect(calcAddOns('starter', ['dfii'], null, [], 'standard')).toBe(299);
+    expect(calcAddOns('starter', ['dfii'], null, 'standard')).toBe(299);
   });
 
   it('adds multiple modules', () => {
-    expect(calcAddOns('starter', ['dfii', 'toll'], null, [], 'standard')).toBe(299 + 199);
+    expect(calcAddOns('starter', ['dfii', 'toll'], null, 'standard')).toBe(299 + 199);
   });
 
   it('adds seat pack', () => {
-    expect(calcAddOns('starter', [], 'seats_5', [], 'standard')).toBe(99);
+    expect(calcAddOns('starter', [], 'seats_5', 'standard')).toBe(99);
   });
 
   it('skips seat pack for scale plan (unlimited included)', () => {
-    expect(calcAddOns('scale', [], 'seats_10', [], 'standard')).toBe(0);
+    expect(calcAddOns('scale', [], 'seats_10', 'standard')).toBe(0);
   });
 
-  it('skips consolidation and api for scale plan (already included)', () => {
-    expect(calcAddOns('scale', ['consolidation', 'api'], null, [], 'standard')).toBe(0);
+  it('skips consolidation for scale plan (already included)', () => {
+    expect(calcAddOns('scale', ['consolidation'], null, 'standard')).toBe(0);
   });
 
   it('adds professional support tier', () => {
-    expect(calcAddOns('starter', [], null, [], 'professional')).toBe(199);
+    expect(calcAddOns('starter', [], null, 'professional')).toBe(199);
   });
 
   it('adds enterprise support tier', () => {
-    expect(calcAddOns('starter', [], null, [], 'enterprise')).toBe(499);
+    expect(calcAddOns('starter', [], null, 'enterprise')).toBe(499);
   });
 
   it('computes combined total correctly', () => {
     // dfii 299 + toll 199 + seats_5 99 + professional 199 = 796
-    expect(calcAddOns('starter', ['dfii', 'toll'], 'seats_5', [], 'professional')).toBe(796);
+    expect(calcAddOns('starter', ['dfii', 'toll'], 'seats_5', 'professional')).toBe(796);
   });
 });
 

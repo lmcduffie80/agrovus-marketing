@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 const capabilities = [
   { title: "Bill of Materials", desc: "Multi-level BOMs with version control. Manage formulations, yield factors, and component substitutions." },
   { title: "Work Order Management", desc: "Create, release, and track work orders from planned through built. Real-time status visibility across the shop floor." },
-  { title: "Blend Scheduling", desc: "Schedule blend runs based on available inventory and demand. Prevent over-commitment before it happens." },
+  { title: "Work Order Target Dates", desc: "Set target completion dates on every work order to keep production runs planned and on track." },
   { title: "AI BOM Generation", desc: "Upload a crop support file (CSF) and AI generates a draft BOM automatically — cutting setup time from hours to minutes." },
   { title: "Material Requirements", desc: "MRP-style requirements planning. Know what raw materials you need and when to purchase them." },
   { title: "Production Costing", desc: "Capture labor, overhead, and material costs per work order. Compare actual vs. standard cost at close." },
@@ -24,7 +24,7 @@ export default function ProductionPage() {
               Production built for<br />ag formulation
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              BOMs, work orders, and blend scheduling designed specifically for the way ag manufacturers actually produce — from crop support files to finished product.
+              BOMs, work orders, and production scheduling designed specifically for the way ag manufacturers actually produce — from crop support files to finished product.
             </p>
             <Link href="/pricing" className="inline-flex items-center justify-center rounded-lg bg-[#00B477] hover:bg-[#009962] text-white font-semibold px-6 py-3 transition-colors">
               Start Free Trial →

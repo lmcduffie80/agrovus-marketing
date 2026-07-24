@@ -9,14 +9,14 @@ const features = [
     icon: "📦",
     title: "Catalog & Inventory",
     description:
-      "Finished goods catalog with material costing, real-time multi-location inventory, lot tracking, and FIFO costing across your facilities.",
+      "Finished goods catalog with material costing, real-time multi-location inventory, lot tracking, and moving-average (AVCO) costing across your facilities.",
   },
   {
     href: "/features/production",
     icon: "🏭",
     title: "Production & Work Orders",
     description:
-      "Bill of materials, work orders, and blend scheduling purpose-built for formulated ag products.",
+      "Bill of materials, work orders, and production scheduling purpose-built for formulated ag products.",
   },
   {
     href: "/features/crm",
@@ -44,7 +44,7 @@ const features = [
     icon: "🌐",
     title: "Customer Portal",
     description:
-      "Self-service portal lets customers review invoices, download documents, and submit new orders — branded for you.",
+      "Self-service portal lets customers review invoices, download documents, and upload crop support files for new product requests — branded for you.",
   },
 ];
 

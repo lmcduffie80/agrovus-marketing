@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 const capabilities = [
   { title: "Multi-Location Tracking", desc: "Track stock across warehouses, blending facilities, and distribution points in real time." },
   { title: "Lot & Batch Traceability", desc: "Full lot-level traceability from receipt to fulfillment. Recall-ready in minutes, not days." },
-  { title: "FIFO Costing", desc: "Automatic first-in-first-out cost layering. Know your true cost of goods at every moment." },
+  { title: "Moving-Average Costing", desc: "Automatic weighted-average cost recalculation on every receipt. Know your true cost of goods at every moment." },
   { title: "Inventory Transfers", desc: "Move stock between locations with a few clicks. Transfer history and audit trail included." },
   { title: "Reorder Points", desc: "Set min/max levels per item per location. Get alerts before you stock out, not after." },
   { title: "Physical Count Tools", desc: "Guided cycle counts and full physical inventory. Variance reports with GL impact calculated automatically." },
@@ -24,7 +24,7 @@ export default function InventoryPage() {
               Inventory built for<br />ag complexity
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Multi-location, lot-tracked, FIFO-costed inventory that handles the real-world complexity of ag manufacturing and distribution.
+              Multi-location, lot-tracked inventory with moving-average costing that handles the real-world complexity of ag manufacturing and distribution.
             </p>
             <Link href="/pricing" className="inline-flex items-center justify-center rounded-lg bg-[#00B477] hover:bg-[#009962] text-white font-semibold px-6 py-3 transition-colors">
               Start Free Trial →
@@ -37,7 +37,7 @@ export default function InventoryPage() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 grid grid-cols-2 sm:grid-cols-4 gap-8">
           {[
             { value: "Lot-level", label: "Traceability" },
-            { value: "FIFO", label: "Cost layering" },
+            { value: "AVCO", label: "Cost layering" },
             { value: "Unlimited", label: "Locations" },
             { value: "Real-time", label: "Availability" },
           ].map((s) => (

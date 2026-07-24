@@ -7,8 +7,8 @@ const capabilities = [
   { title: "Bank Reconciliation", desc: "Match transactions to invoices and expenses with one click. Full audit trail and unexplained variance reporting." },
   { title: "AR Aging Reports", desc: "See who owes what and for how long. Automated reminders for overdue balances." },
   { title: "Manual Invoices", desc: "Create one-off invoices for services, consulting, or non-inventory items. PDF generation and email delivery built in." },
-  { title: "Multi-Entity Financials", desc: "Separate financials per subsidiary with consolidated reporting. Intercompany transactions handled automatically." },
-  { title: "Financial Consolidation", desc: "Roll up financials across entities with elimination entries and minority interest calculations." },
+  { title: "Multi-Entity Financials", desc: "Separate financials per subsidiary, with intercompany partner setup to keep cross-entity transactions in sync." },
+  { title: "General Ledger & Reporting", desc: "Full general ledger, journal entries, trial balance, and balance sheet / P&L reporting built in." },
   { title: "Audit Trail", desc: "Every transaction is immutable and timestamped. Full change history for compliance and audit readiness." },
 ];
 
@@ -38,7 +38,7 @@ export default function FinancePage() {
           {[
             { value: "Plaid", label: "Bank feed integration" },
             { value: "Real-time", label: "AR aging" },
-            { value: "Multi-entity", label: "Financial rollup" },
+            { value: "Multi-entity", label: "Finance module" },
             { value: "Full", label: "Audit trail" },
           ].map((s) => (
             <div key={s.label} className="text-center">

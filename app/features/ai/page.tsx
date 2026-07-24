@@ -3,10 +3,10 @@ import { Badge } from "@/components/ui/badge";
 
 const capabilities = [
   { title: "SDS Document Parsing", desc: "Upload a Safety Data Sheet PDF and AI extracts hazmat classifications, transport info, PPE requirements, and more — in seconds." },
-  { title: "BOM Generation from CSF", desc: "Upload a crop support file and AI drafts a full bill of materials with components, quantities, and yield factors." },
-  { title: "Hazmat Auto-Flagging", desc: "AI scans every product in your catalog and flags hazmat classifications automatically. Stay DOT-compliant without manual review." },
+  { title: "BOM Generation from CSF", desc: "Upload a crop support file and AI drafts a starting bill of materials with components and concentrations for your team to review and approve." },
+  { title: "Hazmat Flagging at Fulfillment", desc: "When you create a fulfillment, AI checks SDS-derived hazmat data and flags DOT-regulated items automatically." },
   { title: "AI Lookup by Item Code", desc: "Query any item code to instantly retrieve its hazmat status, SDS data, and transport classification — no searching required." },
-  { title: "Bulk Document Processing", desc: "Upload batches of SDS PDFs and AI processes them all. Populate your entire SDS repository in one pass." },
+  { title: "CSF Routing to Production", desc: "Customer-submitted crop support files are parsed by AI and routed straight to your production team for review." },
   { title: "Structured Data Extraction", desc: "AI converts unstructured PDF data into clean, structured records that feed your inventory, BOMs, and compliance reports." },
 ];
 
@@ -22,7 +22,7 @@ export default function AIPage() {
               AI that understands<br />agriculture
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Agrovus AI reads your SDS documents, generates BOMs from crop support files, and keeps your hazmat records current — automatically.
+              Agrovus AI reads your SDS documents, drafts BOMs from crop support files, and flags hazmat details as you build fulfillments.
             </p>
             <Link href="/pricing" className="inline-flex items-center justify-center rounded-lg bg-[#00B477] hover:bg-[#009962] text-white font-semibold px-6 py-3 transition-colors">
               Start Free Trial →
@@ -35,8 +35,8 @@ export default function AIPage() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 grid grid-cols-2 sm:grid-cols-4 gap-8">
           {[
             { value: "Seconds", label: "SDS parse time" },
-            { value: "Auto", label: "Hazmat flagging" },
-            { value: "Bulk", label: "Document processing" },
+            { value: "Auto", label: "Hazmat flagging at fulfillment" },
+            { value: "Guided", label: "BOM drafting from CSF" },
             { value: "Structured", label: "Data extraction" },
           ].map((s) => (
             <div key={s.label} className="text-center">

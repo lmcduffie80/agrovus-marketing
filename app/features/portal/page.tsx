@@ -4,12 +4,12 @@ import { Badge } from "@/components/ui/badge";
 const capabilities = [
   { title: "Invoice Access", desc: "Customers view and download their invoices directly — no more \"can you resend that invoice\" calls." },
   { title: "Document Downloads", desc: "SDS sheets, certificates of analysis, delivery notes, BOLs — all available to the customer on demand." },
-  { title: "Order Submission", desc: "Customers submit new orders through the portal. Orders flow directly into your ERP with no re-entry." },
+  { title: "Order History", desc: "Customers see their order history in one place — no more digging through email threads to find what shipped when." },
   { title: "Crop Support File Upload", desc: "Customers upload CSF documents for new product requests. AI parses them and routes to your production team." },
   { title: "Branded Experience", desc: "White-labeled with your company name. Customers see your brand, not ours." },
   { title: "Secure Authentication", desc: "Each customer gets their own secure login. Data is fully isolated — no customer sees another's records." },
   { title: "Impersonation for Support", desc: "Your team can impersonate any customer account to troubleshoot or demonstrate without sharing credentials." },
-  { title: "Mobile Friendly", desc: "Fully responsive — customers can check invoices and submit orders from their phone in the field." },
+  { title: "Mobile Friendly", desc: "Fully responsive — customers can check invoices and download documents from their phone in the field." },
 ];
 
 export default function PortalPage() {
@@ -38,7 +38,7 @@ export default function PortalPage() {
           {[
             { value: "Branded", label: "Your identity" },
             { value: "Secure", label: "Per-customer login" },
-            { value: "Self-service", label: "Orders & documents" },
+            { value: "Self-service", label: "Invoices & documents" },
             { value: "Mobile", label: "Ready in the field" },
           ].map((s) => (
             <div key={s.label} className="text-center">
