@@ -2,7 +2,20 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
 import "./globals.css";
+import { ThemeSwitcher } from "@/components/theme-switcher";
+
+const THEME_PREVIEW_SCRIPT = `
+(function () {
+  try {
+    var t = window.localStorage.getItem("agrovus-preview-theme");
+    if (t && t !== "default") {
+      document.documentElement.setAttribute("data-theme", t);
+    }
+  } catch (e) {}
+})();
+`;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +50,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${jakartaSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {/* Applies any saved preview palette before first paint to avoid a flash. */}
+        <Script id="theme-preview-init" strategy="beforeInteractive">
+          {THEME_PREVIEW_SCRIPT}
+        </Script>
         <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 flex h-16 items-center justify-between">
             {/* Logo — wider render so the icon + wordmark both read clearly */}
@@ -66,7 +83,7 @@ export default function RootLayout({
               </Link>
               <Link
                 href="/pricing"
-                className="inline-flex items-center justify-center rounded-md bg-[#00B477] px-4 py-1.5 text-sm font-medium text-white hover:bg-[#009962] transition-colors"
+                className="btn-gradient-primary inline-flex items-center justify-center rounded-md bg-primary px-4 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary-hover transition-colors"
               >
                 Get Started
               </Link>
@@ -120,6 +137,8 @@ export default function RootLayout({
             </div>
           </div>
         </footer>
+
+        <ThemeSwitcher />
       </body>
     </html>
   );
