@@ -35,6 +35,9 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-tint: var(--primary-tint);
+  --color-primary-tint-foreground: var(--primary-tint-foreground);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -57,6 +60,10 @@
   --popover-foreground: oklch(0.145 0 0);
   --primary: #00B477;
   --primary-foreground: oklch(0.985 0 0);
+  --primary-hover: #009962;
+  --primary-tint: #f0fdf9;
+  --primary-tint-foreground: #ccf5e7;
+  --primary-accent: var(--primary);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
@@ -117,6 +124,92 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/*
+ * Preview palettes — temporary, for evaluating a modernized brand color.
+ * Applied via [data-theme] on <html> by components/theme-switcher.tsx.
+ * Remove this block (and the switcher) once a palette is chosen and
+ * merged into the default :root values above.
+ */
+:root[data-theme="emerald-slate"] {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+  --primary: #12b76a;
+  --primary-hover: #0e9f5c;
+  --primary-foreground: #ffffff;
+  --primary-tint: #ecfdf5;
+  --primary-tint-foreground: #6ee7b7;
+  --primary-accent: var(--primary);
+}
+
+:root[data-theme="deep-forest"] {
+  --background: #0a0f0d;
+  --foreground: #ecfdf5;
+  --card: #101715;
+  --card-foreground: #ecfdf5;
+  --muted: #131b18;
+  --muted-foreground: #8fa79d;
+  --border: #1e2a25;
+  --primary: #34d399;
+  --primary-hover: #6ee7b7;
+  --primary-foreground: #052e1f;
+  --primary-tint: #10241c;
+  --primary-tint-foreground: #a7f3d0;
+  --primary-accent: var(--primary);
+}
+
+:root[data-theme="mint-ink"] {
+  --background: #fafaf9;
+  --foreground: #0b1220;
+  --card: #ffffff;
+  --card-foreground: #0b1220;
+  --muted: #f1f0ec;
+  --muted-foreground: #5b6472;
+  --border: #e4e3dc;
+  --primary: #00c285;
+  --primary-hover: #00a873;
+  --primary-foreground: #ffffff;
+  --primary-tint: #e8fbf3;
+  --primary-tint-foreground: #4fd8a6;
+  --primary-accent: var(--primary);
+}
+
+:root[data-theme="emerald-gradient"] {
+  --background: #ffffff;
+  --foreground: #0f1a16;
+  --card: #ffffff;
+  --card-foreground: #0f1a16;
+  --muted: #f3f6f5;
+  --muted-foreground: #5c6b65;
+  --border: #e1e9e6;
+  --primary: #059669;
+  --primary-hover: #047857;
+  --primary-foreground: #ffffff;
+  --primary-tint: #ecfeff;
+  --primary-tint-foreground: #67e8f9;
+  --primary-accent: #06b6d4;
+}
+
+:root[data-theme="sage-charcoal"] {
+  --background: #fbfbf9;
+  --foreground: #1c1f1e;
+  --card: #ffffff;
+  --card-foreground: #1c1f1e;
+  --muted: #f2f1ee;
+  --muted-foreground: #6b6d69;
+  --border: #e4e3df;
+  --primary: #3f9c6d;
+  --primary-hover: #357f59;
+  --primary-foreground: #ffffff;
+  --primary-tint: #eef5f0;
+  --primary-tint-foreground: #9fc4ac;
+  --primary-accent: var(--primary);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -127,4 +220,15 @@
   html {
     @apply font-sans;
   }
+}
+
+/*
+ * Only paints a gradient under the "Emerald Gradient" palette; every other
+ * palette leaves background-image unset so normal bg-primary/hover colors show.
+ */
+:root[data-theme="emerald-gradient"] .btn-gradient-primary {
+  background-image: linear-gradient(135deg, var(--primary), var(--primary-accent));
+}
+:root[data-theme="emerald-gradient"] .btn-gradient-primary:hover {
+  background-image: linear-gradient(135deg, var(--primary-hover), var(--primary-accent));
 }
