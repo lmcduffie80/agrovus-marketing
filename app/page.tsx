@@ -54,12 +54,12 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-background">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-24 sm:py-32 text-center">
-          <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 hover:bg-primary/10">
+          <Badge className="mb-6 bg-[#00B477]/10 text-[#00B477] border-[#00B477]/20 hover:bg-[#00B477]/10">
             Purpose-built for agriculture
           </Badge>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-6">
             The ERP ag companies{" "}
-            <span className="text-primary">actually use.</span>
+            <span className="text-[#00B477]">actually use.</span>
           </h1>
           <p className="mx-auto max-w-2xl text-lg sm:text-xl text-muted-foreground mb-10">
             One platform for CRM, inventory, production, finance, and customer
@@ -68,7 +68,7 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/pricing">
-              <Button size="lg" className="btn-gradient-primary bg-primary hover:bg-primary-hover text-primary-foreground w-full sm:w-auto">
+              <Button size="lg" className="bg-[#00B477] hover:bg-[#009962] text-white w-full sm:w-auto">
                 See Pricing →
               </Button>
             </Link>
@@ -85,7 +85,7 @@ export default function HomePage() {
           className="absolute inset-0 -z-10 opacity-[0.03]"
           style={{
             backgroundImage:
-              "linear-gradient(var(--primary) 1px, transparent 1px), linear-gradient(to right, var(--primary) 1px, transparent 1px)",
+              "linear-gradient(#00B477 1px, transparent 1px), linear-gradient(to right, #00B477 1px, transparent 1px)",
             backgroundSize: "48px 48px",
           }}
         />
@@ -107,14 +107,14 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((f) => (
               <Link key={f.title} href={f.href} className="group">
-                <Card className="h-full border-border shadow-sm hover:shadow-md hover:border-primary/30 transition-all">
+                <Card className="h-full border-border shadow-sm hover:shadow-md hover:border-[#00B477]/30 transition-all">
                   <CardContent className="pt-6">
                     <div className="text-3xl mb-3">{f.icon}</div>
-                    <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">{f.title}</h3>
+                    <h3 className="font-semibold text-lg mb-2 group-hover:text-[#00B477] transition-colors">{f.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">
                       {f.description}
                     </p>
-                    <p className="text-xs font-medium text-primary mt-3">Learn more →</p>
+                    <p className="text-xs font-medium text-[#00B477] mt-3">Learn more →</p>
                   </CardContent>
                 </Card>
               </Link>
@@ -124,19 +124,19 @@ export default function HomePage() {
       </section>
 
       {/* CTA Banner */}
-      <section className="btn-gradient-primary bg-primary py-16 sm:py-20">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 text-center text-primary-foreground">
+      <section className="bg-[#00B477] py-16 sm:py-20">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 text-center text-white">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
             Ready to modernize your operation?
           </h2>
-          <p className="text-primary-tint-foreground text-lg mb-8">
+          <p className="text-[#ccf5e7] text-lg mb-8">
             Get started today with a 14-day free trial on your license. The
             implementation fee secures your onboarding slot.
           </p>
           <Link href="/pricing">
             <Button
               size="lg"
-              className="bg-background text-primary hover:bg-primary-tint font-semibold"
+              className="bg-white text-[#00B477] hover:bg-[#f0fdf9] font-semibold"
             >
               View Plans & Pricing
             </Button>
