@@ -54,7 +54,7 @@ function applyTheme(themeId: string) {
 
 export function ThemeSwitcher() {
   const [active, setActive] = useState<string>("default");
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     // Mirrors the palette already applied by the beforeInteractive script in
