@@ -22,8 +22,19 @@ function isLockExempt(pathname: string) {
   return LOCK_EXEMPT_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"));
 }
 
+// The storefront subdomain is a separate product (proxied to the Agrovus-erp
+// commerce module via next.config.ts rewrites) with its own tenant-admin auth
+// — it launches independently of the marketing site and must never be gated
+// behind the marketing site's own pre-launch lock or PUBLIC_PATHS logic.
+const STORE_HOSTNAME_PREFIX = "store.";
+
 export function proxy(req: NextRequest) {
   const { pathname, searchParams } = req.nextUrl;
+  const hostname = req.headers.get("host") ?? "";
+
+  if (hostname.startsWith(STORE_HOSTNAME_PREFIX)) {
+    return NextResponse.next();
+  }
 
   if (SITE_LOCK_PASSWORD && !isLockExempt(pathname)) {
     const key = searchParams.get("key");
