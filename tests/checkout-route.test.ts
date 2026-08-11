@@ -83,7 +83,7 @@ describe('POST /api/checkout', () => {
     await post({ planId: 'starter' });
     const items: LineItem[] = mockSessionCreate.mock.calls[0]?.[0]?.line_items ?? [];
     const impl = items.find(li => li.price_data?.product_data?.name === 'Starter Implementation Fee');
-    expect(impl?.price_data?.unit_amount).toBe(99900);
+    expect(impl?.price_data?.unit_amount).toBe(500000);
     expect(impl?.price_data?.recurring).toBeUndefined();
   });
 

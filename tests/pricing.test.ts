@@ -4,9 +4,9 @@ import { describe, it, expect } from 'vitest';
 // ─── Replicate the pure logic from pricing/page.tsx ──────────────────────────
 
 const PLANS = [
-  { id: 'starter',  monthlyPrice: 499,  annualPrice: 399,  impl: 999,  featured: false },
-  { id: 'growth',   monthlyPrice: 1199, annualPrice: 959,  impl: 1999, featured: true  },
-  { id: 'scale',    monthlyPrice: 2499, annualPrice: 1999, impl: 4999, featured: false },
+  { id: 'starter',  monthlyPrice: 499,  annualPrice: 399,  impl: 5000,  featured: false },
+  { id: 'growth',   monthlyPrice: 1199, annualPrice: 959,  impl: 12000, featured: true  },
+  { id: 'scale',    monthlyPrice: 2499, annualPrice: 1999, impl: 20000, featured: false },
 ];
 
 const MODULES = [

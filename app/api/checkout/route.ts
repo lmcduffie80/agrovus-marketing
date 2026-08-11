@@ -7,9 +7,9 @@ export const dynamic = 'force-dynamic';
 // ─── Pricing constants (USD cents, match /pricing page) ───────────────────────
 
 const PLANS = {
-  starter: { name: 'Starter', monthly: 49900, annual: 399 * 12 * 100, impl: 99900 },
-  growth:  { name: 'Growth',  monthly: 119900, annual: 959 * 12 * 100, impl: 199900 },
-  scale:   { name: 'Scale',   monthly: 249900, annual: 1999 * 12 * 100, impl: 499900 },
+  starter: { name: 'Starter', monthly: 49900, annual: 399 * 12 * 100, impl: 500000 },
+  growth:  { name: 'Growth',  monthly: 119900, annual: 959 * 12 * 100, impl: 1200000 },
+  scale:   { name: 'Scale',   monthly: 249900, annual: 1999 * 12 * 100, impl: 2000000 },
 } as const;
 
 type PlanKey = keyof typeof PLANS;
