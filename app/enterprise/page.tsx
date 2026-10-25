@@ -41,8 +41,9 @@ const parts = [
   },
   {
     part: "Custom integration",
-    price: "$15,000–$40,000 each",
-    covers: "Optional SAP, EDI, carriers, scales, or client systems",
+    price: "$250,000–$600,000",
+    covers: "Optional SAP, EDI, carriers, scales, or client systems — priced by scope",
+
   },
 ];
 
