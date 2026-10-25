@@ -32,7 +32,7 @@ const parts = [
   {
     part: "Scoping",
     price: "$50,000 one-time",
-    covers: "AI-assisted discovery (2–4 weeks): process maps, requirements, prototype, and fixed-scope proposal",
+    covers: "AI-assisted discovery (4–6 weeks): process maps, requirements, prototype, and fixed-scope proposal",
   },
   {
     part: "Implementation",
@@ -172,7 +172,7 @@ export default function EnterprisePage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/10 w-full sm:w-auto"
+                className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/15 hover:text-primary-foreground w-full sm:w-auto"
               >
                 Compare self-serve plans
               </Button>

@@ -382,7 +382,7 @@ export default function PricingPage() {
               <h3>Custom ERP</h3>
               <p>AI-assisted scoping, then a fixed-scope phased build — own the system outright or license the Agrovus core.</p>
               <ul className="offer-list">
-                <li>Scoping engagement: $50,000 (2–4 weeks)</li>
+                <li>Scoping engagement: $50,000 (4–6 weeks)</li>
                 <li>Module extension: $25,000–$75,000</li>
                 <li>Department system: $100,000–$250,000</li>
                 <li>Company-wide ERP: $300,000–$750,000</li>

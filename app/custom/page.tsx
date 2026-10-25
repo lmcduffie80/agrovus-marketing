@@ -77,7 +77,7 @@ export default function CustomPage() {
             AI-assisted scoping
           </h2>
           <p className="text-muted-foreground mb-2 max-w-xl">
-            2–4 weeks · <span className="text-foreground font-semibold">$50,000</span>
+            4–6 weeks · <span className="text-foreground font-semibold">$50,000</span>
           </p>
           <p className="text-sm text-muted-foreground mb-8 max-w-2xl">
             Filters tire-kickers, pays for the work that wins the deal, and
@@ -188,7 +188,7 @@ export default function CustomPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/10 w-full sm:w-auto"
+                className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/15 hover:text-primary-foreground w-full sm:w-auto"
               >
                 Compare Enterprise
               </Button>

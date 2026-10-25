@@ -270,7 +270,7 @@ export default function HomePage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/10 w-full sm:w-auto"
+                className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/15 hover:text-primary-foreground w-full sm:w-auto"
               >
                 Contact Sales
               </Button>
