@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "Enterprise — Agrovus",
   description:
-    "Annual Enterprise contracts: platform fee, volume user pricing, implementation, and SLA for 50+ user multi-site operations.",
+    "Annual Enterprise contracts: platform fee, volume user pricing, $50,000 scoping, implementation, and SLA for 50+ user multi-site operations.",
 };
 
 const parts = [
@@ -30,9 +30,14 @@ const parts = [
     covers: "Lowest per-user rate for large user counts",
   },
   {
+    part: "Scoping",
+    price: "$50,000 one-time",
+    covers: "AI-assisted discovery (2–4 weeks): process maps, requirements, prototype, and fixed-scope proposal",
+  },
+  {
     part: "Implementation",
     price: "$25,000–$150,000 one-time",
-    covers: "Scoping, data migration, integrations, training, go-live support",
+    covers: "Data migration, integrations, training, go-live support — quoted from the scoping session",
   },
   {
     part: "Dedicated environment",

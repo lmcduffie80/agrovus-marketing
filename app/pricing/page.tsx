@@ -372,6 +372,7 @@ export default function PricingPage() {
               <ul className="offer-list">
                 <li>$36,000 / year platform fee</li>
                 <li>$50–$40 per user / month by volume band</li>
+                <li>$50,000 one-time scoping engagement</li>
                 <li>$25,000–$150,000 one-time implementation</li>
                 <li>Optional dedicated environment +$18,000 / year</li>
               </ul>
