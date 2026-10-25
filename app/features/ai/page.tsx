@@ -19,10 +19,10 @@ export default function AIPage() {
           <div className="max-w-2xl">
             <Badge className="mb-4 bg-[#00B477]/10 text-[#00B477] border-[#00B477]/20">AI Workflows</Badge>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-              AI that understands<br />agriculture
+              AI for documents,<br />BOMs, and compliance
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Agrovus AI reads your SDS documents, drafts BOMs from crop support files, and flags hazmat details as you build fulfillments.
+              Agrovus AI reads SDS documents, drafts BOMs from source files, and flags hazmat details as you build fulfillments — with agriculture pack examples like crop support files when that pack is on.
             </p>
             <Link href="/pricing" className="inline-flex items-center justify-center rounded-lg bg-[#00B477] hover:bg-[#009962] text-white font-semibold px-6 py-3 transition-colors">
               Start Free Trial →

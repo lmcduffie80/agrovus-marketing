@@ -21,10 +21,10 @@ export default function ProductionPage() {
           <div className="max-w-2xl">
             <Badge className="mb-4 bg-[#00B477]/10 text-[#00B477] border-[#00B477]/20">Production</Badge>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-              Production built for<br />ag formulation
+              Production built for<br />how you make
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              BOMs, work orders, and production scheduling designed specifically for the way ag manufacturers actually produce — from crop support files to finished product.
+              BOMs, work orders, and production scheduling for formulated and assembled products — from source files and recipes through finished goods.
             </p>
             <Link href="/pricing" className="inline-flex items-center justify-center rounded-lg bg-[#00B477] hover:bg-[#009962] text-white font-semibold px-6 py-3 transition-colors">
               Start Free Trial →

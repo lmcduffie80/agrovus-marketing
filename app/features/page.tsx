@@ -7,21 +7,21 @@ const features = [
     icon: "📦",
     name: "Catalog & Inventory",
     tagline: "Products, costing, and stock in one place",
-    desc: "Finished goods catalog with material costing, multi-location inventory, lot tracking, moving-average costing, and SDS repository.",
+    desc: "Finished goods catalog with material costing, multi-location inventory, lot tracking, moving-average costing, and compliance document storage.",
   },
   {
     href: "/features/production",
     icon: "🏭",
     name: "Production & Work Orders",
-    tagline: "BOMs and work orders built for ag",
-    desc: "Bills of materials, work orders, and production scheduling designed for formulated ag products.",
+    tagline: "BOMs and work orders that match how you make",
+    desc: "Bills of materials, work orders, and production scheduling for formulated and assembled products.",
   },
   {
     href: "/features/crm",
     icon: "🌾",
     name: "Sales & CRM",
     tagline: "From first inquiry to closed deal",
-    desc: "Manage leads, track opportunities, forecast production, and run your sales team — all built around ag sales cycles.",
+    desc: "Manage leads, track opportunities, forecast production, and run your sales team alongside inventory and finance.",
   },
   {
     href: "/features/finance",
@@ -34,15 +34,15 @@ const features = [
     href: "/features/ai",
     icon: "🤖",
     name: "AI-Powered Workflows",
-    tagline: "Automation that understands agriculture",
-    desc: "Parse SDS documents, auto-generate BOMs from crop support files, and flag hazmat requirements — automatically.",
+    tagline: "Automation for documents and production",
+    desc: "Parse SDS documents, draft BOMs from source files, and flag hazmat requirements — automatically. Agriculture pack examples included.",
   },
   {
     href: "/features/portal",
     icon: "🌐",
     name: "Customer Portal",
     tagline: "Self-service for your customers",
-    desc: "Branded portal where customers review invoices, download documents, and upload crop support files for new product requests — without calling you.",
+    desc: "Branded portal where customers review invoices, download documents, and submit product requests — without calling you.",
   },
 ];
 
@@ -55,7 +55,8 @@ export default function FeaturesPage() {
           Everything in one platform
         </h1>
         <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-          Every module built specifically for ag manufacturers and distributors — no bolt-ons, no workarounds.
+          Inventory, purchasing, sales, production, and billing for distributors,
+          manufacturers, and warehouses — with industry packs for vertical workflows.
         </p>
       </div>
 
@@ -77,7 +78,7 @@ export default function FeaturesPage() {
 
       <div className="mt-16 text-center bg-[#00B477]/5 border border-[#00B477]/20 rounded-2xl p-10">
         <h2 className="text-2xl font-bold mb-3">Ready to see it in action?</h2>
-        <p className="text-muted-foreground mb-6">Start a 14-day free trial — no credit card required for the license.</p>
+        <p className="text-muted-foreground mb-6">Start a 14-day free trial — or talk to us about Enterprise and custom builds.</p>
         <Link
           href="/pricing"
           className="inline-flex items-center justify-center rounded-lg bg-[#00B477] hover:bg-[#009962] text-white font-semibold px-6 py-3 transition-colors"

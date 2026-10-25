@@ -21,10 +21,10 @@ export default function InventoryPage() {
           <div className="max-w-2xl">
             <Badge className="mb-4 bg-[#00B477]/10 text-[#00B477] border-[#00B477]/20">Inventory</Badge>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-              Inventory built for<br />ag complexity
+              Inventory built for<br />real operations
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Multi-location, lot-tracked inventory with moving-average costing that handles the real-world complexity of ag manufacturing and distribution.
+              Multi-location, lot-tracked inventory with moving-average costing for distributors, manufacturers, and warehouses — including agriculture pack workflows when you need them.
             </p>
             <Link href="/pricing" className="inline-flex items-center justify-center rounded-lg bg-[#00B477] hover:bg-[#009962] text-white font-semibold px-6 py-3 transition-colors">
               Start Free Trial →

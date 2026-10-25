@@ -20,10 +20,10 @@ export default function CRMPage() {
           <div className="max-w-2xl">
             <Badge className="mb-4 bg-[#00B477]/10 text-[#00B477] border-[#00B477]/20">Sales & CRM</Badge>
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
-              Sales & CRM built for<br />ag sales cycles
+              Sales & CRM tied to<br />inventory and production
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
-              From first inquiry to production forecast, Agrovus tracks every deal and keeps your production plan in view — no spreadsheets required.
+              From first inquiry to production forecast, Agrovus tracks every deal and keeps your operations plan in view — no spreadsheets required.
             </p>
             <Link
               href="/pricing"

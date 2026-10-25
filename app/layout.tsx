@@ -34,9 +34,9 @@ const jakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Agrovus — ERP Built for Agriculture",
+  title: "Agrovus — ERP for distributors, manufacturers & warehouses",
   description:
-    "The all-in-one ERP platform for ag manufacturers and distributors. CRM, inventory, production, finance, and AI — purpose-built for the industry.",
+    "Inventory, purchasing, sales, production, and billing in one platform — with industry packs for agriculture, chemicals, food, MRO, 3PL, and manufacturing. Self-serve, Enterprise, or custom ERP.",
 };
 
 export default function RootLayout({
@@ -68,7 +68,7 @@ export default function RootLayout({
               />
             </Link>
 
-            <nav className="flex items-center gap-6 text-sm">
+            <nav className="flex items-center gap-4 sm:gap-5 text-sm flex-wrap justify-end">
               <Link
                 href="/features"
                 className="text-muted-foreground hover:text-foreground transition-colors"
@@ -80,6 +80,18 @@ export default function RootLayout({
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 Pricing
+              </Link>
+              <Link
+                href="/enterprise"
+                className="text-muted-foreground hover:text-foreground transition-colors hidden sm:inline"
+              >
+                Enterprise
+              </Link>
+              <Link
+                href="/custom"
+                className="text-muted-foreground hover:text-foreground transition-colors hidden sm:inline"
+              >
+                Custom
               </Link>
               <Link
                 href="/pricing"
@@ -111,7 +123,7 @@ export default function RootLayout({
                   style={{ height: 28, width: "auto" }}
                 />
                 <p className="text-sm text-muted-foreground mt-2 max-w-xs">
-                  ERP built for agriculture — from seed to shelf.
+                  ERP for distributors, manufacturers, and warehouses — with industry packs for every market.
                 </p>
               </div>
               <div className="flex gap-12 text-sm">
@@ -125,8 +137,10 @@ export default function RootLayout({
                   <Link href="/features/portal" className="text-muted-foreground hover:text-foreground transition-colors">Customer Portal</Link>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p className="font-semibold text-foreground mb-1">Company</p>
-                  <Link href="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</Link>
+                  <p className="font-semibold text-foreground mb-1">Buy</p>
+                  <Link href="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">Self-serve pricing</Link>
+                  <Link href="/enterprise" className="text-muted-foreground hover:text-foreground transition-colors">Enterprise</Link>
+                  <Link href="/custom" className="text-muted-foreground hover:text-foreground transition-colors">Custom ERP</Link>
                   <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</Link>
                   <a href="mailto:support@agrovus.app" className="text-muted-foreground hover:text-foreground transition-colors">Support</a>
                 </div>

@@ -202,7 +202,20 @@ export default function PricingPage() {
         .summary-note{font-size:11px;color:#5A7A70;text-align:center}
         .p-error{background:#FFF0F0;border:1px solid #FFB3B3;color:#C0392B;font-size:13px;padding:12px 16px;border-radius:8px;margin-top:16px;text-align:center}
         .trial-note{text-align:center;font-size:13px;color:var(--t3);margin-top:16px}
+        .offer-block{margin-top:64px;padding-top:48px;border-top:1px solid var(--bd)}
+        .offer-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}
+        .offer-card{background:var(--bg2);border:1.5px solid var(--bd);border-radius:16px;padding:28px 24px}
+        .offer-card h3{font-family:var(--fh);font-size:22px;font-weight:800;letter-spacing:-.02em;margin:0 0 8px;color:var(--t)}
+        .offer-card p{font-size:14px;color:var(--t2);line-height:1.55;margin:0 0 16px}
+        .offer-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin:0 0 22px;padding:0}
+        .offer-list li{font-size:13px;color:var(--t2);display:flex;gap:8px;align-items:flex-start}
+        .offer-list li::before{content:'✓';color:var(--g);font-weight:700;flex-shrink:0}
+        .offer-link{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:9px;font-size:14px;font-weight:600;text-decoration:none;background:var(--bg);color:var(--t);border:1.5px solid var(--bd2);transition:.2s}
+        .offer-link:hover{border-color:var(--g);color:var(--g)}
+        .offer-link.primary{background:var(--g);color:#fff;border-color:var(--g)}
+        .offer-link.primary:hover{background:var(--gm);color:#fff}
         @media(max-width:720px){
+          .offer-grid{grid-template-columns:1fr}
           .pgrid{grid-template-columns:1fr;max-width:380px;margin-left:auto;margin-right:auto}
           .pcard.ft{transform:none}
           .seat-grid,.support-grid{grid-template-columns:1fr 1fr}
@@ -343,7 +356,40 @@ export default function PricingPage() {
         })()}
 
         {error && <div className="p-error">⚠️ {error} — please try again or contact support@agrovus.app</div>}
-        <p className="trial-note">All plans include a 14-day free trial · Cancel anytime · Annual plans billed monthly at discounted rate</p>
+        <p className="trial-note">Starter and Growth include a 14-day free trial · Cancel anytime · Annual plans billed at the discounted rate</p>
+
+        {/* Enterprise + Custom (sales-led) */}
+        <div className="offer-block">
+          <div className="hdr" style={{ marginBottom: 0 }}>
+            <div className="slbl">Beyond self-serve</div>
+            <div className="stit">Enterprise &amp; Custom ERP</div>
+            <p className="ssub">Annual contracts and custom builds for larger operations — priced from our go-to-market offerings, sold with a sales call.</p>
+          </div>
+          <div className="offer-grid">
+            <div className="offer-card">
+              <h3>Enterprise</h3>
+              <p>For 50+ users, multi-site ops, SLAs, and deeper integrations. Annual contract: platform fee + volume user rates + implementation.</p>
+              <ul className="offer-list">
+                <li>$36,000 / year platform fee</li>
+                <li>$50–$40 per user / month by volume band</li>
+                <li>$25,000–$150,000 one-time implementation</li>
+                <li>Optional dedicated environment +$18,000 / year</li>
+              </ul>
+              <a className="offer-link primary" href="/enterprise">Enterprise details →</a>
+            </div>
+            <div className="offer-card">
+              <h3>Custom ERP</h3>
+              <p>AI-assisted scoping, then a fixed-scope phased build — own the system outright or license the Agrovus core.</p>
+              <ul className="offer-list">
+                <li>Scoping engagement: $50,000 (2–4 weeks)</li>
+                <li>Module extension: $25,000–$75,000</li>
+                <li>Department system: $100,000–$250,000</li>
+                <li>Company-wide ERP: $300,000–$750,000</li>
+              </ul>
+              <a className="offer-link" href="/custom">Custom services →</a>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
