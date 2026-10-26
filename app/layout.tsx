@@ -70,6 +70,12 @@ export default function RootLayout({
 
             <nav className="flex items-center gap-4 sm:gap-5 text-sm flex-wrap justify-end">
               <Link
+                href="/about"
+                className="text-muted-foreground hover:text-foreground transition-colors hidden sm:inline"
+              >
+                About
+              </Link>
+              <Link
                 href="/features"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
@@ -92,12 +98,6 @@ export default function RootLayout({
                 className="text-muted-foreground hover:text-foreground transition-colors hidden sm:inline"
               >
                 Custom
-              </Link>
-              <Link
-                href="/about"
-                className="text-muted-foreground hover:text-foreground transition-colors hidden sm:inline"
-              >
-                About
               </Link>
               <Link
                 href="/pricing"
