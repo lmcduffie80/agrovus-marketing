@@ -9,6 +9,11 @@ import type { NextConfig } from "next";
 const STORE_ORIGIN = process.env.STORE_ORIGIN || "https://agrovus.app";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      { source: "/enterprise", destination: "/pricing#enterprise", permanent: true },
+    ];
+  },
   async rewrites() {
     return {
       beforeFiles: [

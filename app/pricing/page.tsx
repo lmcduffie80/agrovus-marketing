@@ -59,6 +59,26 @@ const SUPPORT_TIERS = [
   { id: 'enterprise',   name: 'Enterprise',   price: 499, desc: 'Dedicated CSM · 2hr SLA' },
 ];
 
+const ENTERPRISE_PARTS = [
+  { part: 'Platform fee',          price: '$36,000 / year',            covers: 'All modules, unlimited locations, API, SSO, audit log, sandbox' },
+  { part: 'Users 51–150',          price: '$50 / user / month',        covers: 'Rate applies to every user once the count lands in this band' },
+  { part: 'Users 151–300',         price: '$45 / user / month',        covers: 'Volume rate for mid-size Enterprise deployments' },
+  { part: 'Users 301+',            price: '$40 / user / month',        covers: 'Lowest per-user rate for large user counts' },
+  { part: 'Scoping',               price: '$50,000 one-time',          covers: 'AI-assisted discovery (4–6 weeks): process maps, requirements, prototype, and fixed-scope proposal' },
+  { part: 'Implementation',        price: '$25,000–$150,000 one-time', covers: 'Data migration, integrations, training, go-live support — quoted from the scoping session' },
+  { part: 'Dedicated environment', price: '+$18,000 / year',           covers: 'Optional separate database and hosting for isolation' },
+  { part: 'Custom integration',    price: '$250,000–$600,000',         covers: 'Optional SAP, EDI, carriers, scales, or client systems — priced by scope' },
+];
+
+const ENTERPRISE_TERMS = [
+  '1-year minimum; 5% off for a 3-year term, with a 5% per year renewal price cap',
+  'Billed annually in advance, or quarterly at a 3% premium',
+  '99.9% monthly uptime SLA with service credits for misses',
+  'Named account contact; 1-hour response for system-down issues; quarterly business reviews',
+  'You own your data and can export anytime; full export within 30 days of termination',
+  'Annual user true-up; added users billed from the date added',
+];
+
 function fmt(n: number) {
   return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 }
@@ -214,7 +234,26 @@ export default function PricingPage() {
         .offer-link:hover{border-color:var(--g);color:var(--g)}
         .offer-link.primary{background:var(--g);color:#fff;border-color:var(--g)}
         .offer-link.primary:hover{background:var(--gm);color:#fff}
+        .ent-jump{display:inline-block;margin:-12px 0 0;font-size:13px;font-weight:600;color:var(--gm);text-decoration:none}
+        .ent-jump:hover{text-decoration:underline}
+        .ent{scroll-margin-top:88px;background:var(--bg2);border:1.5px solid var(--bd);border-radius:16px;padding:32px;margin-top:28px;box-shadow:var(--sh)}
+        .ent-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:24px}
+        .ent h3{font-family:var(--fh);font-size:22px;font-weight:800;letter-spacing:-.02em;margin:0 0 8px;color:var(--t)}
+        .ent-intro{font-size:14px;color:var(--t2);line-height:1.55;max-width:620px;margin:0}
+        .ent-table-wrap{overflow-x:auto;border:1px solid var(--bd);border-radius:12px;margin-bottom:10px}
+        .ent-table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+        .ent-table th{background:var(--bg);font-weight:600;padding:10px 14px;border-bottom:1px solid var(--bd);color:var(--t)}
+        .ent-table td{padding:10px 14px;border-bottom:1px solid var(--bd);color:var(--t2);vertical-align:top}
+        .ent-table tr:last-child td{border-bottom:none}
+        .ent-table td.ent-part{font-weight:600;color:var(--t);white-space:nowrap}
+        .ent-table td.ent-price{color:var(--gm);font-weight:600;white-space:nowrap}
+        .ent-example{font-size:12px;color:var(--t3);margin:0 0 28px}
+        .ent-terms{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 28px;margin:0;padding:0}
+        .ent-terms li{font-size:13px;color:var(--t2);line-height:1.5;display:flex;gap:8px;align-items:flex-start}
+        .ent-terms li::before{content:'✓';color:var(--g);font-weight:700;flex-shrink:0}
         @media(max-width:720px){
+          .ent{padding:24px 18px}
+          .ent-terms{grid-template-columns:1fr}
           .offer-grid{grid-template-columns:1fr}
           .pgrid{grid-template-columns:1fr;max-width:380px;margin-left:auto;margin-right:auto}
           .pcard.ft{transform:none}
@@ -230,6 +269,7 @@ export default function PricingPage() {
           <div className="slbl">Pricing</div>
           <div className="stit">Build your Agrovus plan</div>
           <p className="ssub">Start with a base plan, then add the modules and features your operation actually needs.</p>
+          <a className="ent-jump" href="#enterprise">Need 50+ users or multiple sites? See Enterprise pricing ↓</a>
         </div>
 
         {/* ANNUAL TOGGLE */}
@@ -365,19 +405,46 @@ export default function PricingPage() {
             <div className="stit">Enterprise &amp; Custom ERP</div>
             <p className="ssub">Annual contracts and custom builds for larger operations — priced from our go-to-market offerings, sold with a sales call.</p>
           </div>
-          <div className="offer-grid">
-            <div className="offer-card">
-              <h3>Enterprise</h3>
-              <p>For 50+ users, multi-site ops, SLAs, and deeper integrations. Annual contract: platform fee + volume user rates + implementation.</p>
-              <ul className="offer-list">
-                <li>$36,000 / year platform fee</li>
-                <li>$50–$40 per user / month by volume band</li>
-                <li>$50,000 one-time scoping engagement</li>
-                <li>$25,000–$150,000 one-time implementation</li>
-                <li>Optional dedicated environment +$18,000 / year</li>
-              </ul>
-              <a className="offer-link primary" href="/enterprise">Enterprise details →</a>
+          <section id="enterprise" className="ent">
+            <div className="ent-head">
+              <div>
+                <h3>Enterprise</h3>
+                <p className="ent-intro">
+                  Annual contracts for multi-site operations. Qualify when you have more than 50 users, need more
+                  than three integrations, need an uptime guarantee, or run several companies or sites.
+                  Platform fee + volume user rates + implementation.
+                </p>
+              </div>
+              <a className="offer-link primary" href="/contact?topic=enterprise">Contact Sales</a>
             </div>
+
+            <div className="ent-table-wrap">
+              <table className="ent-table">
+                <thead>
+                  <tr><th>Part</th><th>Price (USD)</th><th>What it covers</th></tr>
+                </thead>
+                <tbody>
+                  {ENTERPRISE_PARTS.map(row => (
+                    <tr key={row.part}>
+                      <td className="ent-part">{row.part}</td>
+                      <td className="ent-price">{row.price}</td>
+                      <td>{row.covers}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="ent-example">
+              Example: 200 users ≈ $144,000 / year plus implementation. 500 users ≈ $276,000 / year plus implementation.
+            </p>
+
+            <div className="addon-section-title">Contract terms</div>
+            <ul className="ent-terms">
+              {ENTERPRISE_TERMS.map(t => <li key={t}>{t}</li>)}
+            </ul>
+          </section>
+
+          <div className="offer-grid" style={{ gridTemplateColumns: '1fr', marginTop: 20 }}>
             <div className="offer-card">
               <h3>Custom ERP</h3>
               <p>AI-assisted scoping, then a fixed-scope phased build — own the system outright or license the Agrovus core.</p>

@@ -88,12 +88,6 @@ export default function RootLayout({
                 Pricing
               </Link>
               <Link
-                href="/enterprise"
-                className="text-muted-foreground hover:text-foreground transition-colors hidden sm:inline"
-              >
-                Enterprise
-              </Link>
-              <Link
                 href="/custom"
                 className="text-muted-foreground hover:text-foreground transition-colors hidden sm:inline"
               >
@@ -145,7 +139,7 @@ export default function RootLayout({
                 <div className="flex flex-col gap-2">
                   <p className="font-semibold text-foreground mb-1">Buy</p>
                   <Link href="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">Self-serve pricing</Link>
-                  <Link href="/enterprise" className="text-muted-foreground hover:text-foreground transition-colors">Enterprise</Link>
+                  <Link href="/pricing#enterprise" className="text-muted-foreground hover:text-foreground transition-colors">Enterprise</Link>
                   <Link href="/custom" className="text-muted-foreground hover:text-foreground transition-colors">Custom ERP</Link>
                   <Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact Sales</Link>
                   <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link>

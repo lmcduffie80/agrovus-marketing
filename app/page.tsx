@@ -108,7 +108,7 @@ export default function HomePage() {
                 See Pricing →
               </Button>
             </Link>
-            <Link href="/enterprise">
+            <Link href="/pricing#enterprise">
               <Button size="lg" variant="outline" className="w-full sm:w-auto">
                 Enterprise & Custom
               </Button>
@@ -226,7 +226,7 @@ export default function HomePage() {
                 Platform fee, volume user rates, SLA, and guided implementation
                 for 50+ users and multi-site ops.
               </p>
-              <Link href="/enterprise" className="text-sm font-medium text-primary hover:underline">
+              <Link href="/pricing#enterprise" className="text-sm font-medium text-primary hover:underline">
                 Enterprise pricing →
               </Link>
             </div>

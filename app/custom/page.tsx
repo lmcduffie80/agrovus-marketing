@@ -240,7 +240,7 @@ export default function CustomPage() {
                 Request scoping
               </Button>
             </Link>
-            <Link href="/enterprise">
+            <Link href="/pricing#enterprise">
               <Button
                 size="lg"
                 variant="outline"
