@@ -12,6 +12,7 @@ const FORWARDING_RULES: Record<string, string[]> = {
   "sales@agrovus.com": ["lee@innovative-cc.com"],
   "support@agrovus.com": ["lee@innovative-cc.com"],
   "privacy@agrovus.com": ["lee@innovative-cc.com"],
+  "lee.mcduffie@agrovus.com": ["lee@innovative-cc.com"],
 };
 
 export async function POST(req: NextRequest) {

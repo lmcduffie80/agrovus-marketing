@@ -89,7 +89,7 @@ describe('POST /api/webhooks/resend — inbound forwarding', () => {
     expect(mockForward).toHaveBeenCalledOnce();
   });
 
-  it.each(['sales@agrovus.com', 'support@agrovus.com', 'privacy@agrovus.com'])(
+  it.each(['sales@agrovus.com', 'support@agrovus.com', 'privacy@agrovus.com', 'lee.mcduffie@agrovus.com'])(
     'forwards mail for %s to lee@innovative-cc.com',
     async (address) => {
       const event = receivedEvent({ to: [address], received_for: [address] });
