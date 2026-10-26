@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 
@@ -155,6 +156,7 @@ export default function RootLayout({
         </footer>
 
         <ThemeSwitcher />
+        <Analytics />
       </body>
     </html>
   );
