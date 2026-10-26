@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "Custom ERP — Agrovus",
   description:
-    "AI-assisted scoping and fixed-scope custom ERP builds — module extensions to company-wide systems, with full handoff or licensed Agrovus core.",
+    "AI-assisted scoping and fixed-scope custom ERP builds — module extensions to company-wide systems, with full handoff or licensed Agrovus core. Plus standalone custom CRMs with built-in AI tools.",
 };
 
 const scopingSteps = [
@@ -34,6 +34,33 @@ const bands = [
     scope: "6+ modules, 100–500+ users, several integrations, full handoff",
     price: "$300,000–$750,000",
     timeline: "6–12 months",
+  },
+];
+
+const crmAiTools = [
+  {
+    title: "Lead scoring and routing",
+    desc: "AI ranks new leads against your own win history and routes each one to the right rep.",
+  },
+  {
+    title: "Drafted follow-ups",
+    desc: "Emails and next steps drafted from the full deal history. Reps review, edit, and send.",
+  },
+  {
+    title: "Call and email summaries",
+    desc: "Conversations summarized onto the customer record, with action items pulled out automatically.",
+  },
+  {
+    title: "Ask your pipeline",
+    desc: "Plain-English questions about deals, accounts, and forecasts — answered from your live data.",
+  },
+  {
+    title: "Data cleanup and import",
+    desc: "Duplicates merged, gaps filled, and records moved over from spreadsheets or a legacy CRM.",
+  },
+  {
+    title: "Connected to your tools",
+    desc: "Email, calendar, phone, accounting, and the systems your team already uses every day.",
   },
 ];
 
@@ -163,6 +190,35 @@ export default function CustomPage() {
             number of hours, hosting oversight, and updates. Bug fixes stay
             free; new features are quoted separately or covered by the retainer.
           </p>
+        </div>
+      </section>
+
+      <section className="border-t border-border bg-muted/20 py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <h2 className="font-[family-name:var(--font-jakarta)] text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">
+            Custom CRM with AI built in
+          </h2>
+          <p className="text-muted-foreground mb-10 max-w-2xl">
+            Not running Agrovus? We also build standalone CRMs for any business
+            — shaped around how your team actually sells, with AI tools wired
+            into the daily workflow instead of bolted on.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mb-10">
+            {crmAiTools.map((tool) => (
+              <div key={tool.title}>
+                <h3 className="font-semibold text-base mb-2">{tool.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{tool.desc}</p>
+              </div>
+            ))}
+          </div>
+          <a href="mailto:sales@agrovus.app?subject=Custom%20CRM%20with%20AI%20tools">
+            <Button
+              size="lg"
+              className="btn-gradient-primary bg-primary hover:bg-primary-hover text-primary-foreground"
+            >
+              Talk to us about a custom CRM
+            </Button>
+          </a>
         </div>
       </section>
 
