@@ -89,7 +89,7 @@ export default function PricingPage() {
 
   async function handleCheckout(planId: string) {
     if (planId === 'scale') {
-      window.location.assign('mailto:sales@agrovus.app?subject=Agrovus Scale Plan');
+      window.location.assign('/contact?topic=scale');
       return;
     }
     setLoading(planId);
@@ -355,7 +355,7 @@ export default function PricingPage() {
           );
         })()}
 
-        {error && <div className="p-error">⚠️ {error} — please try again or contact support@agrovus.app</div>}
+        {error && <div className="p-error">⚠️ {error} — please try again or contact support@agrovus.com</div>}
         <p className="trial-note">Starter and Growth include a 14-day free trial · Cancel anytime · Annual plans billed at the discounted rate</p>
 
         {/* Enterprise + Custom (sales-led) */}

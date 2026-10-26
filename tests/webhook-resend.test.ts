@@ -89,8 +89,20 @@ describe('POST /api/webhooks/resend — inbound forwarding', () => {
     expect(mockForward).toHaveBeenCalledOnce();
   });
 
+  it.each(['sales@agrovus.com', 'support@agrovus.com', 'privacy@agrovus.com'])(
+    'forwards mail for %s to lee@innovative-cc.com',
+    async (address) => {
+      const event = receivedEvent({ to: [address], received_for: [address] });
+      mockVerify.mockReturnValue(event);
+      const { POST } = await loadRoute();
+      await POST(makeWebhookRequest(event));
+      expect(mockForward).toHaveBeenCalledOnce();
+      expect(mockForward.mock.calls[0][0]).toMatchObject({ to: ['lee@innovative-cc.com'], from: address });
+    },
+  );
+
   it('does not forward mail for other agrovus.com addresses', async () => {
-    const event = receivedEvent({ to: ['sales@agrovus.com'], received_for: ['sales@agrovus.com'] });
+    const event = receivedEvent({ to: ['random@agrovus.com'], received_for: ['random@agrovus.com'] });
     mockVerify.mockReturnValue(event);
     const { POST } = await loadRoute();
     const res = await POST(makeWebhookRequest(event));

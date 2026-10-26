@@ -87,14 +87,14 @@ export default function CustomPage() {
             a fixed-price proposal, then a phased build. Scoping is billed on
             its own and is not credited against the build.
           </p>
-          <a href="mailto:sales@agrovus.app?subject=Agrovus%20custom%20ERP%20scoping">
+          <Link href="/contact?topic=custom-erp">
             <Button
               size="lg"
               className="btn-gradient-primary bg-primary hover:bg-primary-hover text-primary-foreground"
             >
               Request scoping
             </Button>
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -211,14 +211,14 @@ export default function CustomPage() {
               </div>
             ))}
           </div>
-          <a href="mailto:sales@agrovus.app?subject=Custom%20CRM%20with%20AI%20tools">
+          <Link href="/contact?topic=custom-crm">
             <Button
               size="lg"
               className="btn-gradient-primary bg-primary hover:bg-primary-hover text-primary-foreground"
             >
               Talk to us about a custom CRM
             </Button>
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -232,14 +232,14 @@ export default function CustomPage() {
             useful whether or not you proceed to build.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="mailto:sales@agrovus.app?subject=Agrovus%20custom%20ERP%20scoping">
+            <Link href="/contact?topic=custom-erp">
               <Button
                 size="lg"
                 className="bg-background text-primary hover:bg-primary-tint font-semibold w-full sm:w-auto"
               >
                 Request scoping
               </Button>
-            </a>
+            </Link>
             <Link href="/enterprise">
               <Button
                 size="lg"

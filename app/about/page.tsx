@@ -99,7 +99,7 @@ export default function AboutPage() {
                 See pricing
               </Button>
             </Link>
-            <a href="mailto:sales@agrovus.app?subject=Agrovus%20inquiry">
+            <Link href="/contact">
               <Button
                 size="lg"
                 variant="outline"
@@ -107,7 +107,7 @@ export default function AboutPage() {
               >
                 Contact Sales
               </Button>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

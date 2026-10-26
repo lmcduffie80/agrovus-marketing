@@ -10,8 +10,8 @@ export default function PrivacyPage() {
       </p>
       <p className="text-muted-foreground">
         For questions, contact us at{" "}
-        <a href="mailto:privacy@agrovus.app" className="text-[#00B477] hover:underline">
-          privacy@agrovus.app
+        <a href="mailto:privacy@agrovus.com" className="text-[#00B477] hover:underline">
+          privacy@agrovus.com
         </a>
         .
       </p>

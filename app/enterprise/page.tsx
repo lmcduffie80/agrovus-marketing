@@ -84,14 +84,14 @@ export default function EnterprisePage() {
             integrations, need an uptime guarantee, or run several companies or
             sites. Platform fee + volume user rates + implementation.
           </p>
-          <a href="mailto:sales@agrovus.app?subject=Agrovus%20Enterprise%20inquiry">
+          <Link href="/contact?topic=enterprise">
             <Button
               size="lg"
               className="btn-gradient-primary bg-primary hover:bg-primary-hover text-primary-foreground"
             >
               Contact Sales
             </Button>
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -160,14 +160,14 @@ export default function EnterprisePage() {
             an order form.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="mailto:sales@agrovus.app?subject=Agrovus%20Enterprise%20inquiry">
+            <Link href="/contact?topic=enterprise">
               <Button
                 size="lg"
                 className="bg-background text-primary hover:bg-primary-tint font-semibold w-full sm:w-auto"
               >
-                Email Sales
+                Contact Sales
               </Button>
-            </a>
+            </Link>
             <Link href="/pricing">
               <Button
                 size="lg"

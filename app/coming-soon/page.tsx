@@ -22,10 +22,10 @@ export default function ComingSoonPage() {
         </p>
         <p className="text-sm text-muted-foreground">
           <a
-            href="mailto:support@agrovus.app"
+            href="mailto:support@agrovus.com"
             className="hover:text-foreground transition-colors underline underline-offset-4"
           >
-            support@agrovus.app
+            support@agrovus.com
           </a>
         </p>
       </div>

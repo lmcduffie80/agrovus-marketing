@@ -9,6 +9,9 @@ export const dynamic = "force-dynamic";
 // kept in the Resend dashboard (Emails → Receiving).
 const FORWARDING_RULES: Record<string, string[]> = {
   "info@agrovus.com": ["lee@innovative-cc.com"],
+  "sales@agrovus.com": ["lee@innovative-cc.com"],
+  "support@agrovus.com": ["lee@innovative-cc.com"],
+  "privacy@agrovus.com": ["lee@innovative-cc.com"],
 };
 
 export async function POST(req: NextRequest) {

@@ -15,7 +15,7 @@ Replace all Stripe price ID lookups with inline `price_data` in the checkout ses
 
 - **Files changed:** `app/api/checkout/route.ts`, `app/api/webhooks/stripe/route.ts`, `.env.example`
 - **Files unchanged:** pricing page UI, webhook DB logic, ERP provision endpoint, welcome page
-- **Scale plan:** blocked at the checkout API level (Scale goes through `mailto:sales@agrovus.app`)
+- **Scale plan:** blocked at the checkout API level (Scale goes through `/contact?topic=scale`)
 
 ---
 

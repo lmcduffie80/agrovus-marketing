@@ -266,7 +266,7 @@ export default function HomePage() {
                 View Plans & Pricing
               </Button>
             </Link>
-            <a href="mailto:sales@agrovus.app?subject=Agrovus%20sales%20inquiry">
+            <Link href="/contact">
               <Button
                 size="lg"
                 variant="outline"
@@ -274,7 +274,7 @@ export default function HomePage() {
               >
                 Contact Sales
               </Button>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

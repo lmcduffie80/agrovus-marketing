@@ -147,9 +147,10 @@ export default function RootLayout({
                   <Link href="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">Self-serve pricing</Link>
                   <Link href="/enterprise" className="text-muted-foreground hover:text-foreground transition-colors">Enterprise</Link>
                   <Link href="/custom" className="text-muted-foreground hover:text-foreground transition-colors">Custom ERP</Link>
+                  <Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact Sales</Link>
                   <Link href="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link>
                   <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy</Link>
-                  <a href="mailto:support@agrovus.app" className="text-muted-foreground hover:text-foreground transition-colors">Support</a>
+                  <a href="mailto:support@agrovus.com" className="text-muted-foreground hover:text-foreground transition-colors">Support</a>
                 </div>
               </div>
             </div>
